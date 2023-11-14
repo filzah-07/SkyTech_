@@ -114,6 +114,27 @@ p {
   }
 }
 
+/* ========== logo style ========== */
+.logo-container {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  gap: 10px;
+}
+
+.large-icon {
+  font-size: 30px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+
 /* ========== cart style ========== */
 .card-style {
   background: #fff;
