@@ -27,7 +27,7 @@
  <!-- ======== sidebar-nav start =========== -->
  <aside class="sidebar-nav-wrapper">
     <div class="navbar-logo">
-      <a href="inventory.html">
+      <a href="inventory.php">
         <div class="logo-container">
           <span class="material-icons-outlined large-icon">school </span>
           <span class="large-text bold-text"> SkyTech</span>
@@ -38,7 +38,7 @@
       <ul>
         <!-- Inventory Starts -->
         <li class="nav-item">
-          <a href="inventory.html">
+          <a href="inventory.php">
             <span class="icon">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -53,7 +53,7 @@
          <!-- Dashboard Starts -->
          <li class="nav-item">
           <a
-            href="mainMenu.html"
+            href="mainMenu.php"
           >
             <span class="icon">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +68,7 @@
 
         <!-- Expenses Starts -->
       <li class="nav-item">
-        <a href="expenses.html">
+        <a href="expenses.php">
           <span class="icon">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -82,7 +82,7 @@
 
         <!-- Manage Part Starts -->
         <li class="nav-item">
-          <a href="managePart.html">
+          <a href="managePart.php">
             <span class="icon">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                  <path
@@ -96,7 +96,7 @@
 
         <!-- To-Do Starts -->
         <li class="nav-item">
-          <a href="toDo.html">
+          <a href="toDo.php">
             <span class="icon">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
