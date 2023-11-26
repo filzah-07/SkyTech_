@@ -349,7 +349,7 @@
                   <i class="lni lni-cart-full"></i>
                 </div>
                 <div class="content">
-                  <h6 class="mb-10">Work In Progress</h6>
+                  <h6 class="mb-10">Urgent</h6>
                   <h3 class="text-bold mb-10">67</h3>
                 </div>
               </div>
@@ -362,10 +362,12 @@
                   <i class="lni lni-dollar"></i>
                 </div>
                 <div class="content">
-                  <h6 class="mb-10">Closed</h6>
+                  <h6 class="mb-10">Moderate</h6>
                   <h3 class="text-bold mb-10">56</h3>
                 </div>
               </div>
+
+              
               <!-- End Icon Cart -->
             </div>
             <!-- End Col -->
@@ -375,7 +377,7 @@
                   <i class="lni lni-credit-cards"></i>
                 </div>
                 <div class="content">
-                  <h6 class="mb-10">Expected</h6>
+                  <h6 class="mb-10">Low</h6>
                   <h3 class="text-bold mb-10">17</h3>
                 </div>
               </div>
