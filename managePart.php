@@ -1,3 +1,17 @@
+<style>
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust the height as needed */
+}
+
+.button-container {
+    text-align: center;
+}
+</style>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -340,44 +354,50 @@
           </div>
           <!-- ========== title-wrapper end ========== -->
 
+          <form action="formPart.php" method="post">
           <div class="form-elements-wrapper">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="card-style mb-30">
-                        <h6 class="mb-25">Input Fields</h6>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="input-style-1">
-                                    <label>PART NO</label>
-                                    <input type="text" placeholder="PART NO" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="input-style-2">
-                                    <label>PART MATCH</label>
-                                    <input type="text" placeholder="PART MATCH" />
-                                </div>
+              <div class="col-lg-12">
+                <div class="card-style mb-30">
+                    <h6 class="mb-25">Input Fields</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-style-1">
+                                <label>PART NO</label>
+                                <input type="text" name="part_no" placeholder="PART NO" />
                             </div>
                         </div>
-                        <div class="input-style-2">
-                            <label>DESCRIPTION</label>
-                            <textarea placeholder="DESCRIPTION" rows="5"></textarea>
-                        </div>
-                        <div class="input-style-2">
-                            <label>MATERIAL CLASS</label>
-                            <div class="select-position">
-                                <select>
-                                  <option value="">SELECT CATEGORY</option>
-                                  <option value="">ROTABLE</option>
-                                  <option value="">EXPANDABLE</option>
-                                  <option value="">CONSUMABLE</option>
-                                </select>
-                              </div>
+                        <div class="col-md-6">
+                            <div class="input-style-2">
+                                <label>PART MATCH</label>
+                                <input type="text" name="part_match" placeholder="PART MATCH" />
+                            </div>
                         </div>
                     </div>
+                    <div class="input-style-2">
+                        <label>DESCRIPTION</label>
+                        <textarea name="description" placeholder="DESCRIPTION" rows="5"></textarea>
+                    </div>
+                    <div class="input-style-2">
+                        <label>MATERIAL CLASS</label>
+                        <div class="select-position">
+                            <select name="material_class">
+                                <option value="">SELECT CATEGORY</option>
+                                <option value="ROTABLE">ROTABLE</option>
+                                <option value="EXPANDABLE">EXPANDABLE</option>
+                                <option value="CONSUMABLE">CONSUMABLE</option>
+                            </select>
+                        </div>
+                    </div>
+                      <div class="button-container">
+                        <button type="submit" class="main-btn primary-btn rounded-full btn-hover">Submit</button>
+                      </div>
                 </div>
-            </div>
+              </div>
+          </div>
         </div>
+        </form>
+
         
 
         </div>
