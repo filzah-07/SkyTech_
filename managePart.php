@@ -364,29 +364,34 @@
                         <div class="col-md-6">
                             <div class="input-style-1">
                                 <label>PART NO</label>
+                                
                                 <input type="text" name="part_no" placeholder="PART NO" />
+                                <small class="form-text text-danger">* This field is required.</small>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input-style-2">
                                 <label>PART MATCH</label>
                                 <input type="text" name="part_match" placeholder="PART MATCH" />
+                                <small class="form-text text-danger">* This field is required.</small>
                             </div>
                         </div>
                     </div>
                     <div class="input-style-2">
                         <label>DESCRIPTION</label>
                         <textarea name="description" placeholder="DESCRIPTION" rows="5"></textarea>
+                        <small class="form-text text-danger">* This field is required.</small>
                     </div>
                     <div class="input-style-2">
                         <label>MATERIAL CLASS</label>
-                        <div class="select-position">
-                            <select name="material_class">
+                        <div class="select-position"> 
+                        <select name="material_class">
                                 <option value="">SELECT CATEGORY</option>
                                 <option value="ROTABLE">ROTABLE</option>
                                 <option value="EXPANDABLE">EXPANDABLE</option>
                                 <option value="CONSUMABLE">CONSUMABLE</option>
                             </select>
+                            <small class="form-text text-danger">* This field is required.</small>
                         </div>
                     </div>
                       <div class="button-container">

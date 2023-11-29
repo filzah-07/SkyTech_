@@ -340,277 +340,185 @@
           </div>
           <!-- ========== title-wrapper end ========== -->
 
+
+          <?php
+          // Include your database connection code (connect.php or similar)
+          include 'connect.php';
+
+          // Query to get counts for each material class
+          $query = "SELECT material_class, COUNT(*) as count FROM parts GROUP BY material_class";
+
+          // Perform the query
+          $result = $mysqli->query($query);
+
+          // Check if the query was successful
+          if ($result) {
+              // Initialize an array to store the counts
+              $counts = [
+                  'ROTABLE' => 0,
+                  'EXPANDABLE' => 0,
+                  'CONSUMABLE' => 0
+              ];
+
+              // Fetch each row from the result set
+              while ($row = $result->fetch_assoc()) {
+                  // Assign the count to the respective material class
+                  $counts[$row['material_class']] = $row['count'];
+              }
+
+              // Close the result set
+              $result->close();
+          } else {
+              // Handle the query error
+              echo "Error: " . $query . "<br>" . $mysqli->error;
+          }
+
+          // Close the database connection
+          $mysqli->close();
+          ?>
+
+          <!-- Display the counts in your HTML -->
           <div class="row">
-            <div class="col-xl-4 col-lg-4 col-sm-6">
-              <div class="icon-card mb-30">
-                <div class="icon purple">
-                  <i class="lni lni-cart-full"></i>
-                </div>
-                <div class="content">
-                  <h6 class="mb-10">Rotable</h6>
-                  <h3 class="text-bold mb-10">567</h3>
-                </div>
+              <div class="col-xl-4 col-lg-4 col-sm-6">
+                  <div class="icon-card mb-30">
+                      <div class="icon purple">
+                          <i class="lni lni-cart-full"></i>
+                      </div>
+                      <div class="content">
+                          <h6 class="mb-10">ROTABLE</h6>
+                          <h3 class="text-bold mb-10"><?php echo $counts['ROTABLE']; ?></h3>
+                      </div>
+                  </div>
               </div>
-              <!-- End Icon Cart -->
-            </div>
-            <!-- End Col -->
-            <div class="col-xl-4 col-lg-4 col-sm-6">
-              <div class="icon-card mb-30">
-                <div class="icon success">
-                  <i class="lni lni-dollar"></i>
-                </div>
-                <div class="content">
-                  <h6 class="mb-10">Expandable</h6>
-                  <h3 class="text-bold mb-10">567</h3>
-                </div>
+              <div class="col-xl-4 col-lg-4 col-sm-6">
+                  <div class="icon-card mb-30">
+                      <div class="icon success">
+                          <i class="lni lni-dollar"></i>
+                      </div>
+                      <div class="content">
+                          <h6 class="mb-10">EXPANDABLE</h6>
+                          <h3 class="text-bold mb-10"><?php echo $counts['EXPANDABLE']; ?></h3>
+                      </div>
+                  </div>
               </div>
-              <!-- End Icon Cart -->
-            </div>
-            <!-- End Col -->
-            <div class="col-xl-4 col-lg-4 col-sm-6">
-              <div class="icon-card mb-30">
-                <div class="icon primary">
-                  <i class="lni lni-credit-cards"></i>
-                </div>
-                <div class="content">
-                  <h6 class="mb-10">Consumable</h6>
-                  <h3 class="text-bold mb-10">56</h3>
-                </div>
+              <div class="col-xl-4 col-lg-4 col-sm-6">
+                  <div class="icon-card mb-30">
+                      <div class="icon primary">
+                          <i class="lni lni-credit-cards"></i>
+                      </div>
+                      <div class="content">
+                          <h6 class="mb-10">CONSUMABLE</h6>
+                          <h3 class="text-bold mb-10"><?php echo $counts['CONSUMABLE']; ?></h3>
+                      </div>
+                  </div>
               </div>
-              <!-- End Icon Cart -->
-            </div>
-            <!-- End Col -->
+          </div>
+          <!-- ========== label chart ends ========== -->
+
           
-            <!-- ========== tables-wrapper start ========== -->
+          <!-- ========== tables-wrapper start ========== -->
           <div class="tables-wrapper">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card-style mb-30">
+          <div class="row">
+          <div class="col-lg-12">
+              <div class="card-style mb-30">
                   <h6 class="mb-10">List of Parts</h6>
                   <p class="text-sm mb-20">
-                    This is the list of available part.
+                      This is the list of available parts.
                   </p>
                   <div class="table-wrapper table-responsive">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th class="lead-info">
-                            <h6>PART NO</h6>
-                          </th>
-                          <th class="lead-email">
-                            <h6>PART MATCH</h6>
-                          </th>
-                          <th class="lead-phone">
-                            <h6>DESCRIPTION</h6>
-                          </th>
-                          <th class="lead-company">
-                            <h6>MATERIAL CLASS</h6>
-                          </th>
-                          <th>
-                            <h6>ACTION</h6>
-                          </th>
-                        </tr>
-                        <!-- end table row-->
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="min-width">
-                            <div class="lead">   
-                              <div class="lead-text">
-                                <p>GREASEGUN-33</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="min-width">
-                            <p><a href="#0">GREASEGUN33</a></p>
-                          </td>
-                          <td class="min-width">
-                            <p>AEROSHELL GREASE 33</p>
-                          </td>
-                          <td class="min-width">
-                            <p>ROTABLE</p>
-                          </td>
-                          <td> 
-                              <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="lni lni-more-alt"></i>
-                              </button>
-                              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">
-                                <li class="dropdown-item">
-                                  <a href="#0" class="text-gray">Remove</a>
-                                </li>
-                                <li class="dropdown-item">
-                                  <a href="#0" class="text-gray">Edit</a>
-                                </li>
-                              </ul>
-                          </td>
-                        </tr>
-                        <!-- end table row -->
-                        <tr>
-                          <td class="min-width">
-                            <div class="lead">   
-                              <div class="lead-text">
-                                <p>GREASEGUN-33</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="min-width">
-                            <p><a href="#0">GREASEGUN33</a></p>
-                          </td>
-                          <td class="min-width">
-                            <p>AEROSHELL GREASE 33</p>
-                          </td>
-                          <td class="min-width">
-                            <p>ROTABLE</p>
-                          </td>
-                          <td> 
-                            <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown"
-                              aria-expanded="false">
-                              <i class="lni lni-more-alt"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">
-                              <li class="dropdown-item">
-                                <a href="#0" class="text-gray">Remove</a>
-                              </li>
-                              <li class="dropdown-item">
-                                <a href="#0" class="text-gray">Edit</a>
-                              </li>
-                            </ul>
-                        </td>
-                        </tr>
-                        <!-- end table row -->
-                        <tr>
-                          <td class="min-width">
-                            <div class="lead">   
-                              <div class="lead-text">
-                                <p>GREASEGUN-33</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="min-width">
-                            <p><a href="#0">GREASEGUN33</a></p>
-                          </td>
-                          <td class="min-width">
-                            <p>AEROSHELL GREASE 33</p>
-                          </td>
-                          <td class="min-width">
-                            <p>ROTABLE</p>
-                          </td>
-                          <td> 
-                            <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown"
-                              aria-expanded="false">
-                              <i class="lni lni-more-alt"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">
-                              <li class="dropdown-item">
-                                <a href="#0" class="text-gray">Remove</a>
-                              </li>
-                              <li class="dropdown-item">
-                                <a href="#0" class="text-gray">Edit</a>
-                              </li>
-                            </ul>
-                        </td>
-                        </tr>
-                        <!-- end table row -->
-                        <tr>
-                          <td class="min-width">
-                            <div class="lead">   
-                              <div class="lead-text">
-                                <p>GREASEGUN-33</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="min-width">
-                            <p><a href="#0">GREASEGUN33</a></p>
-                          </td>
-                          <td class="min-width">
-                            <p>AEROSHELL GREASE 33</p>
-                          </td>
-                          <td class="min-width">
-                            <p>ROTABLE</p>
-                          </td>
-                          <td> 
-                            <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown"
-                              aria-expanded="false">
-                              <i class="lni lni-more-alt"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">
-                              <li class="dropdown-item">
-                                <a href="#0" class="text-gray">Remove</a>
-                              </li>
-                              <li class="dropdown-item">
-                                <a href="#0" class="text-gray">Edit</a>
-                              </li>
-                            </ul>
-                        </td>
-                        </tr>
-                        <!-- end table row -->
-                        <tr>
-                          <td class="min-width">
-                            <div class="lead">   
-                              <div class="lead-text">
-                                <p>GREASEGUN-33</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="min-width">
-                            <p><a href="#0">GREASEGUN33</a></p>
-                          </td>
-                          <td class="min-width">
-                            <p>AEROSHELL GREASE 33</p>
-                          </td>
-                          <td class="min-width">
-                            <p>ROTABLE</p>
-                          </td>
-                          <td> 
-                            <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown"
-                              aria-expanded="false">
-                              <i class="lni lni-more-alt"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">
-                              <li class="dropdown-item">
-                                <a href="#0" class="text-gray">Remove</a>
-                              </li>
-                              <li class="dropdown-item">
-                                <a href="#0" class="text-gray">Edit</a>
-                              </li>
-                            </ul>
-                        </td>
-                        </tr>
-                        <!-- end table row -->
-                        <tr>
-                          <td class="min-width">
-                            <div class="lead">   
-                              <div class="lead-text">
-                                <p>GREASEGUN-33</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="min-width">
-                            <p><a href="#0">GREASEGUN33</a></p>
-                          </td>
-                          <td class="min-width">
-                            <p>AEROSHELL GREASE 33</p>
-                          </td>
-                          <td class="min-width">
-                            <p>ROTABLE</p>
-                          </td>
-                          <td> 
-                            <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown"
-                              aria-expanded="false">
-                              <i class="lni lni-more-alt"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">
-                              <li class="dropdown-item">
-                                <a href="#0" class="text-gray">Remove</a>
-                              </li>
-                              <li class="dropdown-item">
-                                <a href="#0" class="text-gray">Edit</a>
-                              </li>
-                            </ul>
-                        </td>
-                        </tr>
-                        <!-- end table row -->
+                      <table class="table">
+                          <thead>
+                              <tr>
+                              <th style="width: 10%;" class="lead-text">
+                                  <h6>NO</h6>
+                                  </th>
+                                  <th style="width: 10%;" class="lead-info">
+                                      <h6>PART NO</h6>
+                                  </th>
+                                  <th style="width: 10%;" class="lead-info">
+                                      <h6>PART MATCH</h6>
+                                  </th>
+                                  <th class="lead-info">
+                                      <h6>DESCRIPTION</h6>
+                                  </th>
+                                  <th style="width: 10%;" class="lead-info">
+                                      <h6>MATERIAL CLASS</h6>
+                                  </th>
+                                  <th>
+                                      <h6>ACTION</h6>
+                                  </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+
+                              <?php
+                              // Include your database connection code (connect.php or similar)
+                              include 'connect.php';
+
+                              // Query to retrieve data from the parts table
+                              $query = "SELECT part_id, part_no, part_match, description, material_class FROM parts";
+                              $result = $mysqli->query($query);
+
+                              // Check if the query was successful
+                              if ($result) {
+                                  // Fetch each row from the result set
+                                  while ($row = $result->fetch_assoc()) {
+                                      echo '<tr>';
+                                      echo '<td class="min-width">';
+                                      echo '<div class="lead">';
+                                      echo '<div class="lead-text">';
+                                      echo '<p>' . $row['part_id'] . '</p>';
+                                      echo '</div>';
+                                      echo '</div>';
+                                      echo '</td>';
+                                      echo '<td class="min-width">';
+                                      echo '<p><a href="#0">' . $row['part_no'] . '</a></p>';
+                                      echo '</td>';
+                                      echo '<td class="min-width">';
+                                      echo '<p><a href="#0">' . $row['part_match'] . '</a></p>';
+                                      echo '</td>';
+                                      echo '<td class="min-width">';
+                                      echo '<p>' . $row['description'] . '</p>';
+                                      echo '</td>';
+                                      echo '<td class="min-width">';
+                                      echo '<p>' . $row['material_class'] . '</p>';
+                                      echo '</td>';
+                                      echo '<td>';
+                                      echo '<button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown" aria-expanded="false">';
+                                      echo '<i class="lni lni-more-alt"></i>';
+                                      echo '</button>';
+                                      echo '<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">';
+                                      echo '<li class="dropdown-item">';
+                                      echo '<a href="editPart.php?id=' . $row['part_id'] . '" class="text-gray">Edit</a>';
+                                      echo '</li>';
+                                      echo '<li class="dropdown-item">';
+                                      echo '<a href="deletePart.php?id=' . $row['part_id'] . '" onclick="return confirmDelete()" class="text-gray">Remove</a>';
+                                      echo '</li>';
+                                      echo '</ul>';
+                                      echo '</td>';
+                                      echo '</tr>';
+                                  }
+
+                                  // Close the result set
+                                  $result->close();
+                              } else {
+                                  // Handle the query error
+                                  echo "Error: " . $query . "<br>" . $mysqli->error;
+                              }
+
+                              // Close the database connection
+                              $mysqli->close();
+                              ?>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+        </div>
+        </div>
+        </div>
+
+
+                      <!-- end table row -->
                       </tbody>
                     </table>
                     <!-- end table -->
@@ -643,6 +551,11 @@
     <script src="assets/js/main.js"></script>
 
     <script>
+        // ======== delete action ======== //
+        function confirmDelete() {
+        return confirm("Are you sure you want to delete this entry?");
+      }
+
       // ======== jvectormap activation
       var markers = [
         { name: "Egypt", coords: [26.8206, 30.8025] },
