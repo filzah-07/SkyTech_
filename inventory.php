@@ -489,10 +489,10 @@
                                       echo '</button>';
                                       echo '<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">';
                                       echo '<li class="dropdown-item">';
-                                      echo '<a href="editPart.php?id=' . $row['part_id'] . '" class="text-gray">Edit</a>';
+                                      echo '<a href="editPart.php?part_id=' . $row['part_id'] . '" class="text-gray">Edit</a>';
                                       echo '</li>';
                                       echo '<li class="dropdown-item">';
-                                      echo '<a href="deletePart.php?id=' . $row['part_id'] . '" onclick="return confirmDelete()" class="text-gray">Remove</a>';
+                                      echo '<a href="deletePart.php?part_id=' . $row['part_id'] . '" onclick="return confirmDelete()" class="text-gray">Remove</a>';
                                       echo '</li>';
                                       echo '</ul>';
                                       echo '</td>';
