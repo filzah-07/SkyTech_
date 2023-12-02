@@ -1,18 +1,3 @@
-<style>
-  .form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Adjust the height as needed */
-}
-
-.button-container {
-    text-align: center;
-}
-
-</style>
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,7 +10,7 @@
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/lineicons.css" rel="stylesheet" type="text/css" />
-    <link rel="stylsesheet" href="assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="assets/css/fullcalendar.css" />
     <link rel="stylesheet" href="assets/css/fullcalendar.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
@@ -66,20 +51,20 @@
       <!-- Inventory Ends -->
 
        <!-- Dashboard Starts -->
-        <li class="nav-item">
-          <a
-            href="mainMenu.php"
-          >
-            <span class="icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M8.74999 18.3333C12.2376 18.3333 15.1364 15.8128 15.7244 12.4941C15.8448 11.8143 15.2737 11.25 14.5833 11.25H9.99999C9.30966 11.25 8.74999 10.6903 8.74999 10V5.41666C8.74999 4.7263 8.18563 4.15512 7.50586 4.27556C4.18711 4.86357 1.66666 7.76243 1.66666 11.25C1.66666 15.162 4.83797 18.3333 8.74999 18.3333Z" /> 
-              </svg>
-            </span>
-            <span class="text">Problem Classifications</span>
-          </a>
-        </li>
-        <!-- Dashboard Starts -->
+       <li class="nav-item">
+        <a
+          href="mainMenu.php"
+        >
+          <span class="icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M8.74999 18.3333C12.2376 18.3333 15.1364 15.8128 15.7244 12.4941C15.8448 11.8143 15.2737 11.25 14.5833 11.25H9.99999C9.30966 11.25 8.74999 10.6903 8.74999 10V5.41666C8.74999 4.7263 8.18563 4.15512 7.50586 4.27556C4.18711 4.86357 1.66666 7.76243 1.66666 11.25C1.66666 15.162 4.83797 18.3333 8.74999 18.3333Z" /> 
+            </svg>
+          </span>
+          <span class="text">Problem Classifications</span>
+        </a>
+      </li>
+      <!-- Dashboard Starts -->
 
       <!-- Expenses Starts -->
       <li class="nav-item">
@@ -212,60 +197,6 @@
                 </div>
                 <!-- notification end -->
 
-                <!-- message start -->
-                <div class="header-message-box ml-15 d-none d-md-flex">
-                  <button class="dropdown-toggle" type="button" id="message" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M7.74866 5.97421C7.91444 5.96367 8.08162 5.95833 8.25005 5.95833C12.5532 5.95833 16.0417 9.4468 16.0417 13.75C16.0417 13.9184 16.0364 14.0856 16.0259 14.2514C16.3246 14.138 16.6127 14.003 16.8883 13.8482L19.2306 14.629C19.7858 14.8141 20.3141 14.2858 20.129 13.7306L19.3482 11.3882C19.8694 10.4604 20.1667 9.38996 20.1667 8.25C20.1667 4.70617 17.2939 1.83333 13.75 1.83333C11.0077 1.83333 8.66702 3.55376 7.74866 5.97421Z"
-                        fill="" />
-                      <path
-                        d="M14.6667 13.75C14.6667 17.2938 11.7939 20.1667 8.25004 20.1667C7.11011 20.1667 6.03962 19.8694 5.11182 19.3482L2.76946 20.129C2.21421 20.3141 1.68597 19.7858 1.87105 19.2306L2.65184 16.8882C2.13062 15.9604 1.83338 14.89 1.83338 13.75C1.83338 10.2062 4.70622 7.33333 8.25004 7.33333C11.7939 7.33333 14.6667 10.2062 14.6667 13.75ZM5.95838 13.75C5.95838 13.2437 5.54797 12.8333 5.04171 12.8333C4.53545 12.8333 4.12504 13.2437 4.12504 13.75C4.12504 14.2563 4.53545 14.6667 5.04171 14.6667C5.54797 14.6667 5.95838 14.2563 5.95838 13.75ZM9.16671 13.75C9.16671 13.2437 8.7563 12.8333 8.25004 12.8333C7.74379 12.8333 7.33338 13.2437 7.33338 13.75C7.33338 14.2563 7.74379 14.6667 8.25004 14.6667C8.7563 14.6667 9.16671 14.2563 9.16671 13.75ZM11.4584 14.6667C11.9647 14.6667 12.375 14.2563 12.375 13.75C12.375 13.2437 11.9647 12.8333 11.4584 12.8333C10.9521 12.8333 10.5417 13.2437 10.5417 13.75C10.5417 14.2563 10.9521 14.6667 11.4584 14.6667Z"
-                        fill="" />
-                    </svg>
-                    <span></span>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="message">
-                    <li>
-                      <a href="#0">
-                        <div class="image">
-                          <img src="assets/images/lead/lead-5.png" alt="" />
-                        </div>
-                        <div class="content">
-                          <h6>Jacob Jones</h6>
-                          <p>Hey!I can across your profile and ...</p>
-                          <span>10 mins ago</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#0">
-                        <div class="image">
-                          <img src="assets/images/lead/lead-3.png" alt="" />
-                        </div>
-                        <div class="content">
-                          <h6>John Doe</h6>
-                          <p>Would you mind please checking out</p>
-                          <span>12 mins ago</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#0">
-                        <div class="image">
-                          <img src="assets/images/lead/lead-2.png" alt="" />
-                        </div>
-                        <div class="content">
-                          <h6>Anee Lee</h6>
-                          <p>Hey! are you available for freelance?</p>
-                          <span>1h ago</span>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <!-- message end -->
 
                 <!-- profile start -->
                 <div class="profile-box ml-15">
@@ -334,7 +265,7 @@
             <div class="row align-items-center">
               <div class="col-md-6">
                 <div class="title">
-                  <h2>Manage Part</h2>
+                  <h2>Inventory</h2>
                 </div>
               </div>
               <!-- end col -->
@@ -343,7 +274,7 @@
                   <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                       <li class="breadcrumb-item">
-                        <a href="#0">Form</a>
+                        <a href="#0"> Inventory</a>
                       </li>
                     </ol>
                   </nav>
@@ -355,57 +286,241 @@
           </div>
           <!-- ========== title-wrapper end ========== -->
 
-          <form action="formPart.php" method="post">
-          <div class="form-elements-wrapper">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card-style mb-30">
-                    <h6 class="mb-25">Input Fields</h6>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-style-1">
-                                <label>PART NO</label>
-                                
-                                <input type="text" name="part_no" placeholder="PART NO" />
-                                <small class="form-text text-danger">* This field is required.</small>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="input-style-2">
-                                <label>PART MATCH</label>
-                                <input type="text" name="part_match" placeholder="PART MATCH" />
-                                <small class="form-text text-danger">* This field is required.</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-style-2">
-                        <label>DESCRIPTION</label>
-                        <textarea name="description" placeholder="DESCRIPTION" rows="5"></textarea>
-                        <small class="form-text text-danger">* This field is required.</small>
-                    </div>
-                    <div class="select-style-1">
-                        <label>MATERIAL CLASS</label>
-                        <div class="select-position select-sm"> 
-                        <select name="material_class">
-                                <option value="">SELECT CATEGORY</option>
-                                <option value="ROTABLE">ROTABLE</option>
-                                <option value="EXPANDABLE">EXPANDABLE</option>
-                                <option value="CONSUMABLE">CONSUMABLE</option>
-                            </select>
-                            <small class="form-text text-danger">* This field is required.</small>
-                        </div>
-                    </div>
-                      <div class="button-container">
-                        <button type="submit" class="main-btn primary-btn rounded-full btn-hover">Submit</button>
-                      </div>
-                </div>
+
+          <?php
+          // Include database connection
+          include 'connect.php';
+
+          // Query to get counts for each material class
+          $query = "SELECT material_class, COUNT(*) as count FROM parts GROUP BY material_class";
+
+          // Perform the query
+          $result = $mysqli->query($query);
+
+          // Check if the query was successful
+          if ($result) {
+              // Initialize an array to store the counts
+              $counts = [
+                  'ROTABLE' => 0,
+                  'EXPANDABLE' => 0,
+                  'CONSUMABLE' => 0
+              ];
+
+              // Fetch each row from the result set
+              while ($row = $result->fetch_assoc()) {
+                  // Assign the count to the respective material class
+                  $counts[$row['material_class']] = $row['count'];
+              }
+
+              // Close the result set
+              $result->close();
+          } else {
+              // Handle the query error
+              echo "Error: " . $query . "<br>" . $mysqli->error;
+          }
+
+          // Close the database connection
+          $mysqli->close();
+          ?>
+          
+
+
+          <!-- ========== label chart starts ========== -->
+        <div class="container-fluid">
+          <div class="row">
+          <!-- ROTABLE chart label -->
+          <div class="col-xl-4 col-lg-4 col-sm-12">
+              <div class="icon-card mb-30">
+                  <div class="icon purple">
+                      <i class="lni lni-cart-full"></i>
+                  </div>
+                  <div class="content text-center">
+                      <h6 class="mb-10">ROTABLE</h6>
+                      <h3 class="text-bold mb-10"><?php echo $counts['ROTABLE']; ?></h3>
+                  </div>
               </div>
           </div>
+          
+
+          <!-- EXPANDABLE chart label -->
+          <div class="row">
+          <div class="col-xl-4 col-lg-4 col-sm-12">
+              <div class="icon-card mb-30">
+                  <div class="icon success">
+                      <i class="lni lni-dollar"></i>
+                  </div>
+                  <div class="content text-center">
+                      <h6 class="mb-10">EXPANDABLE</h6>
+                      <h3 class="text-bold mb-10"><?php echo $counts['EXPANDABLE']; ?></h3>
+                  </div>
+              </div>
+          </div>
+          </div>
+
+          <!-- CONSUMABLE chart label -->
+          <div class="row">
+          <div class="col-xl-4 col-lg-4 col-sm-12">
+              <div class="icon-card mb-30">
+                  <div class="icon primary">
+                      <i class="lni lni-credit-cards"></i>
+                  </div>
+                  <div class="content text-center">
+                      <h6 class="mb-10">CONSUMABLE</h6>
+                      <h3 class="text-bold mb-10"><?php echo $counts['CONSUMABLE']; ?></h3>
+                  </div>
+              </div>
+          </div>
+          </div>
+
+          <!-- ========== label chart ends ========== -->
+
+          <!-- ========== bar chart starts ========== -->
+          <?php
+          include 'connect.php';
+
+          $query = "SELECT material_class, COUNT(*) as count FROM parts GROUP BY material_class";
+          $result = $mysqli->query($query);
+
+          $data = [];
+          while ($row = mysqli_fetch_assoc($result)) {
+              $data[$row['material_class']] = $row['count'];
+          }
+
+          // Prepare data for Chart.js
+          $chartCategories = ['ROTABLE', 'EXPANDABLE', 'CONSUMABLE'];
+          $chartCounts = [];
+
+          foreach ($chartCategories as $category) {
+              $chartCounts[] = $counts[$category];
+          }
+          ?>
+
+          <!-- Bar Chart Canvas -->
+          
+          <div class="col-xl-6 col-lg-6 col-sm-12">
+                <!-- Bar Chart Canvas -->
+                <canvas id="myChart" width="800" height="400"></canvas>
+            
+          </div>
         </div>
-        </form>
 
-        
+          
 
+          <!-- ========== tables-wrapper start ========== -->
+          <div class="table-responsive">
+          <div class="row">
+          <div class="col-lg-12">
+              <div class="card-style mb-30">
+                  <h6 class="mb-10">List of Parts</h6>
+                  <p class="text-sm mb-20">
+                      This is the list of available parts.
+                  </p>
+                  <div class="table-wrapper table-responsive">
+                      <table class="table">
+                          <thead>
+                              <tr>
+                              <th style="width: 10%;" class="lead-text">
+                                  <h6>NO</h6>
+                                  </th>
+                                  <th style="width: 10%;" class="lead-info">
+                                      <h6>PART NO</h6>
+                                  </th>
+                                  <th style="width: 10%;" class="lead-info">
+                                      <h6>PART MATCH</h6>
+                                  </th>
+                                  <th class="lead-info">
+                                      <h6>DESCRIPTION</h6>
+                                  </th>
+                                  <th style="width: 10%;" class="lead-info">
+                                      <h6>MATERIAL CLASS</h6>
+                                  </th>
+                                  <th>
+                                      <h6>ACTION</h6>
+                                  </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+
+                              <?php
+                              // Include your database connection code (connect.php or similar)
+                              include 'connect.php';
+
+                              // Query to retrieve data from the parts table
+                              $query = "SELECT part_id, part_no, part_match, description, material_class FROM parts";
+                              $result = $mysqli->query($query);
+
+                              // Check if the query was successful
+                              if ($result) {
+                                  // Fetch each row from the result set
+                                  while ($row = $result->fetch_assoc()) {
+                                      echo '<tr>';
+                                      echo '<td class="min-width">';
+                                      echo '<div class="lead">';
+                                      echo '<div class="lead-text">';
+                                      echo '<p>' . $row['part_id'] . '</p>';
+                                      echo '</div>';
+                                      echo '</div>';
+                                      echo '</td>';
+                                      echo '<td class="min-width">';
+                                      echo '<p><a href="#0">' . $row['part_no'] . '</a></p>';
+                                      echo '</td>';
+                                      echo '<td class="min-width">';
+                                      echo '<p><a href="#0">' . $row['part_match'] . '</a></p>';
+                                      echo '</td>';
+                                      echo '<td class="min-width">';
+                                      echo '<p>' . $row['description'] . '</p>';
+                                      echo '</td>';
+                                      echo '<td class="min-width">';
+                                      echo '<p>' . $row['material_class'] . '</p>';
+                                      echo '</td>';
+                                      echo '<td>';
+                                      echo '<button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown" aria-expanded="false">';
+                                      echo '<i class="lni lni-more-alt"></i>';
+                                      echo '</button>';
+                                      echo '<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="moreAction1">';
+                                      echo '<li class="dropdown-item">';
+                                      echo '<a href="editPart.php?part_id=' . $row['part_id'] . '" class="text-gray">Edit</a>';
+                                      echo '</li>';
+                                      echo '<li class="dropdown-item">';
+                                      echo '<a href="deletePart.php?part_id=' . $row['part_id'] . '" onclick="return confirmDelete()" class="text-gray">Remove</a>';
+                                      echo '</li>';
+                                      echo '</ul>';
+                                      echo '</td>';
+                                      echo '</tr>';
+                                  }
+
+                                  // Close the result set
+                                  $result->close();
+                              } else {
+                                  // Handle the query error
+                                  echo "Error: " . $query . "<br>" . $mysqli->error;
+                              }
+
+                              // Close the database connection
+                              $mysqli->close();
+                              ?>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+        </div>
+        </div>
+        </div>
+
+
+                      <!-- end table row -->
+                      </tbody>
+                    </table>
+                    <!-- end table -->
+                  </div>
+                </div>
+                <!-- end card -->
+              </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
+          </div>
+          <!-- End Row -->
         </div>
         <!-- end container -->
       </section>
@@ -426,64 +541,43 @@
     <script src="assets/js/main.js"></script>
 
     <script>
-      // ======== jvectormap activation
-      var markers = [
-        { name: "Egypt", coords: [26.8206, 30.8025] },
-        { name: "Russia", coords: [61.524, 105.3188] },
-        { name: "Canada", coords: [56.1304, -106.3468] },
-        { name: "Greenland", coords: [71.7069, -42.6043] },
-        { name: "Brazil", coords: [-14.235, -51.9253] },
-      ];
 
-      var jvm = new jsVectorMap({
-        map: "world_merc",
-        selector: "#map",
-        zoomButtons: true,
+      // ==== BAR CHART === //
+      var ctx = document.getElementById('myChart').getContext('2d');
+              var myChart = new Chart(ctx, {
+                  type: 'bar',
+                  data: {
+                      labels: <?php echo json_encode($chartCategories); ?>,
+                      datasets: [{
+                          label: 'Material Class Counts',
+                          data: <?php echo json_encode($chartCounts); ?>,
+                          backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(255, 206, 86, 0.2)',
+                          ],
+                          borderColor: [
+                              'rgba(255, 99, 132, 1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                          ],
+                          borderWidth: 1,
+                      }],
+                  },
+                  options: {
+                      scales: {
+                          y: {
+                              beginAtZero: true,
+                          },
+                      },
+                  },
+              });
+        // ======== delete action ======== //
+        function confirmDelete() {
+        return confirm("Are you sure you want to delete this entry?");
+      }
 
-        regionStyle: {
-          initial: {
-            fill: "#d1d5db",
-          },
-        },
-
-        labels: {
-          markers: {
-            render: (marker) => marker.name,
-          },
-        },
-
-        markersSelectable: true,
-        selectedMarkers: markers.map((marker, index) => {
-          var name = marker.name;
-
-          if (name === "Russia" || name === "Brazil") {
-            return index;
-          }
-        }),
-        markers: markers,
-        markerStyle: {
-          initial: { fill: "#4A6CF7" },
-          selected: { fill: "#ff5050" },
-        },
-        markerLabelStyle: {
-          initial: {
-            fontWeight: 400,
-            fontSize: 14,
-          },
-        },
-      });
-      // ====== calendar activation
-      document.addEventListener("DOMContentLoaded", function () {
-        var calendarMiniEl = document.getElementById("calendar-mini");
-        var calendarMini = new FullCalendar.Calendar(calendarMiniEl, {
-          initialView: "dayGridMonth",
-          headerToolbar: {
-            end: "today prev,next",
-          },
-        });
-        calendarMini.render();
-      });
-
+     
       // =========== chart one start
       const ctx1 = document.getElementById("Chart1").getContext("2d");
       const chart1 = new Chart(ctx1, {

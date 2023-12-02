@@ -342,7 +342,7 @@
 
 
           <?php
-          // Include your database connection code (connect.php or similar)
+          // Include database connection
           include 'connect.php';
 
           // Query to get counts for each material class
@@ -377,43 +377,88 @@
           $mysqli->close();
           ?>
 
-          <!-- Display the counts in your HTML -->
-          <div class="row">
-              <div class="col-xl-4 col-lg-4 col-sm-6">
-                  <div class="icon-card mb-30">
-                      <div class="icon purple">
+          <!-- ========== form-elements-wrapper start ========== -->
+          <div class="form-elements-wrapper">
+            <div class="row">
+              <div class="col-lg-4">
+                <!-- input style start -->
+                <div class="icon-card mb-30">
+                        <div class="icon purple">
                           <i class="lni lni-cart-full"></i>
-                      </div>
-                      <div class="content">
-                          <h6 class="mb-10">ROTABLE</h6>
-                          <h3 class="text-bold mb-10"><?php echo $counts['ROTABLE']; ?></h3>
-                      </div>
-                  </div>
+                        </div>
+                        <div class="content">
+                            <h6 class="mb-10">ROTABLE</h6>
+                            <h3 class="text-bold mb-10"><?php echo $counts['ROTABLE']; ?></h3>
+                        </div>
+                  <!-- end input -->
+                </div>
+                <!-- end card -->
+                <!-- ======= input style end ======= -->
+
+                <!-- ======= select style start ======= -->
+                <div class="icon-card mb-30">
+                        <div class="icon success">
+                            <i class="lni lni-dollar"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="mb-10">EXPANDABLE</h6>
+                            <h3 class="text-bold mb-10"><?php echo $counts['EXPANDABLE']; ?></h3>
+                        </div>
+                  <!-- end select -->
+                </div>
+                <!-- end card -->
+                <!-- ======= select style end ======= -->
+
+                <!-- ======= select style start ======= -->
+                <div class="card-style mb-30">
+                        <div class="icon primary">
+                            <i class="lni lni-credit-cards"></i>
+                        </div>
+                        <div class="content">
+                            <h6 class="mb-10">CONSUMABLE</h6>
+                            <h3 class="text-bold mb-10"><?php echo $counts['CONSUMABLE']; ?></h3>
+                        </div>
+                  <!-- end input -->
+                </div>
+                <!-- end card -->
+
+              <!-- ======= div class="form-elements-wrapper ======= -->
               </div>
-              <div class="col-xl-4 col-lg-4 col-sm-6">
-                  <div class="icon-card mb-30">
-                      <div class="icon success">
-                          <i class="lni lni-dollar"></i>
-                      </div>
-                      <div class="content">
-                          <h6 class="mb-10">EXPANDABLE</h6>
-                          <h3 class="text-bold mb-10"><?php echo $counts['EXPANDABLE']; ?></h3>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-xl-4 col-lg-4 col-sm-6">
-                  <div class="icon-card mb-30">
-                      <div class="icon primary">
-                          <i class="lni lni-credit-cards"></i>
-                      </div>
-                      <div class="content">
-                          <h6 class="mb-10">CONSUMABLE</h6>
-                          <h3 class="text-bold mb-10"><?php echo $counts['CONSUMABLE']; ?></h3>
-                      </div>
-                  </div>
-              </div>
+              <!-- end col -->
+              <div class="col-lg-8">
+            <!-- ======= textarea style start ======= -->
+
+            <!-- ========== bar chart starts ========== -->
+            <?php
+            include 'connect.php';
+
+            $query = "SELECT material_class, COUNT(*) as count FROM parts GROUP BY material_class";
+            $result = $mysqli->query($query);
+
+            $data = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $data[$row['material_class']] = $row['count'];
+            }
+
+            // Prepare data for Chart.js
+            $chartCategories = ['ROTABLE', 'EXPANDABLE', 'CONSUMABLE'];
+            $chartCounts = [];
+
+            foreach ($chartCategories as $category) {
+                $chartCounts[] = $counts[$category];
+            }
+            ?>
+                <div class="card-style mb-30">
+                  <h6 class="mb-25">Bar Chart</h6>
+                  <canvas id="myChart" width="800" height="400"></canvas>
+                </div>
+              <!-- end col -->
+            </div>
+            <!-- end row -->
           </div>
-          <!-- ========== label chart ends ========== -->
+          <!-- ========== form-elements-wrapper end ========== -->
+        </div>
+        <!-- end container -->
 
           
           <!-- ========== tables-wrapper start ========== -->
@@ -551,6 +596,37 @@
     <script src="assets/js/main.js"></script>
 
     <script>
+      // ==== BAR CHART === //
+      var ctx = document.getElementById('myChart').getContext('2d');
+              var myChart = new Chart(ctx, {
+                  type: 'bar',
+                  data: {
+                      labels: <?php echo json_encode($chartCategories); ?>,
+                      datasets: [{
+                          label: 'Total',
+                          data: <?php echo json_encode($chartCounts); ?>,
+                          backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(255, 206, 86, 0.2)',
+                          ],
+                          borderColor: [
+                              'rgba(255, 99, 132, 1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                          ],
+                          borderWidth: 1,
+                      }],
+                  },
+                  options: {
+                      scales: {
+                          y: {
+                              beginAtZero: true,
+                          },
+                      },
+                  },
+              });
+
         // ======== delete action ======== //
         function confirmDelete() {
         return confirm("Are you sure you want to delete this entry?");
