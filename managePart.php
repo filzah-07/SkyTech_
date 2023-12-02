@@ -343,7 +343,10 @@
                   <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                       <li class="breadcrumb-item">
-                        <a href="#0">Form</a>
+                        <a href="#0">Activity</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">
+                        Manage Part
                       </li>
                     </ol>
                   </nav>
@@ -360,7 +363,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="card-style mb-30">
-                    <h6 class="mb-25">Input Fields</h6>
+                    <h6 class="mb-25">Please fill in all the details required.</h6>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-style-1">
@@ -383,17 +386,19 @@
                         <textarea name="description" placeholder="DESCRIPTION" rows="5"></textarea>
                         <small class="form-text text-danger">* This field is required.</small>
                     </div>
+                    <div class="col-md-4">
                     <div class="select-style-1">
                         <label>MATERIAL CLASS</label>
-                        <div class="select-position select-sm"> 
+                        <div class="select-position"> 
                         <select name="material_class">
                                 <option value="">SELECT CATEGORY</option>
                                 <option value="ROTABLE">ROTABLE</option>
                                 <option value="EXPANDABLE">EXPANDABLE</option>
                                 <option value="CONSUMABLE">CONSUMABLE</option>
                             </select>
-                            <small class="form-text text-danger">* This field is required.</small>
                         </div>
+                        <small class="form-text text-danger">* This field is required.</small>
+                    </div>
                     </div>
                       <div class="button-container">
                         <button type="submit" class="main-btn primary-btn rounded-full btn-hover">Submit</button>
@@ -404,7 +409,7 @@
         </div>
         </form>
 
-        
+     
 
         </div>
         <!-- end container -->

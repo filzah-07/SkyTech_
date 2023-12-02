@@ -10,11 +10,6 @@
     text-align: center;
 }
 
-.resizable-image {
-  width: 100%;
-  height: auto;
-}
-
 </style>
 
 
@@ -331,15 +326,15 @@
       </header>
       <!-- ========== header end ========== -->
 
-      <!-- ========== card components start ========== -->
-      <section class="card-components">
+      <!-- ========== section start ========== -->
+      <section class="section">
         <div class="container-fluid">
           <!-- ========== title-wrapper start ========== -->
           <div class="title-wrapper pt-30">
             <div class="row align-items-center">
               <div class="col-md-6">
                 <div class="title">
-                  <h2>Activity</h2>
+                  <h2>Raise Issue</h2>
                 </div>
               </div>
               <!-- end col -->
@@ -350,7 +345,9 @@
                       <li class="breadcrumb-item">
                         <a href="#0">Activity</a>
                       </li>
-                      
+                      <li class="breadcrumb-item active" aria-current="page">
+                        Raise Issue
+                      </li>
                     </ol>
                   </nav>
                 </div>
@@ -361,60 +358,77 @@
           </div>
           <!-- ========== title-wrapper end ========== -->
 
-          <!-- ========== cards-styles start ========== -->
-          <div class="cards-styles">
-
-            <!-- ========= card-style-5 start ========= -->
+          <form action="formPart.php" method="post">
+          <div class="form-elements-wrapper">
             <div class="row">
-              <div class="col-12">
-                
-              </div>
-              <!-- end col -->
-              <div class="col-xl-6 col-lg-6">
-                <div class="card-style-5 mb-30">
-                  <div class="card-image">
-                    <a href="managePart.php">
-                      <img src="assets/images/cards/cardForm/managePart.jpg" alt="" class="resizable-image"/>
-                    </a>
-                  </div>
-                  <div class="card-content">
-                    <h4><a href="managePart.php">Manage Part</a></h4>
-                    <p>
-                    User can fill this form which designed to facilitate the addition of new parts to the inventory. 
-                    </p>
-                    <a href="managePart.php" class="main-btn primary-btn btn-hover">Manage Part</a>
-                  </div>
+              <div class="col-lg-12">
+                <div class="card-style mb-30">
+                    <h6 class="mb-25">Please fill in all the details required.</h6>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-style-1">
+                                <label>DEFECT ID</label>
+                                
+                                <input type="text" name="part_no" placeholder="DEFECT ID" />
+                                <small class="form-text text-danger">* This field is required.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        <div class="select-style-1">
+                            <label>DEFECT TYPE</label>
+                            <div class="select-position"> 
+                            <select name="material_class">
+                                    <option value="">SELECT CATEGORY</option>
+                                    <option value="ROTABLE">PILOT</option>
+                                    <option value="EXPANDABLE">MAINTENANCE</option>
+                                    <option value="CONSUMABLE">CABIN</option>
+                                </select>
+                            </div>
+                            <small class="form-text text-danger">* This field is required.</small>
+                        </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-style-2">
+                                <label>ISSUE TIME</label>
+                                <input type="text" name="part_match" placeholder="PART MATCH" />
+                                <small class="form-text text-danger">* This field is required.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-style-2">
+                        <label>DESCRIPTION</label>
+                        <textarea name="description" placeholder="DESCRIPTION" rows="5"></textarea>
+                        <small class="form-text text-danger">* This field is required.</small>
+                    </div>
+                    <div class="col-md-4">
+                    <div class="select-style-1">
+                        <label>MATERIAL CLASS</label>
+                        <div class="select-position"> 
+                        <select name="material_class">
+                                <option value="">SELECT CATEGORY</option>
+                                <option value="ROTABLE">ROTABLE</option>
+                                <option value="EXPANDABLE">EXPANDABLE</option>
+                                <option value="CONSUMABLE">CONSUMABLE</option>
+                            </select>
+                        </div>
+                        <small class="form-text text-danger">* This field is required.</small>
+                    </div>
+                    </div>
+                      <div class="button-container">
+                        <button type="submit" class="main-btn primary-btn rounded-full btn-hover">Submit</button>
+                      </div>
                 </div>
-                <!-- end card -->
               </div>
-              <!-- end col -->
-              <div class="col-xl-6 col-lg-6">
-                <div class="card-style-5 mb-30">
-                  <div class="card-image">
-                    <a href="raiseIssue.php">
-                      <img src="assets/images/cards/cardForm/defectPart.jpg" alt="" />
-                    </a>
-                  </div>
-                  <div class="card-content">
-                    <h4><a href="raiseIssue.php">Raise Issue</a></h4>
-                    <p>
-                    User can fill this form which designed to report and document various issues or defects related to the inventory.
-                    </p>
-                    <a href="raiseIssue.php" class="main-btn primary-btn btn-hover">Raise Issue</a>
-                  </div>
-                </div>
-                <!-- end card -->
-              </div>
-              <!-- end col -->
-            </div>
-            <!-- end row -->
-            <!-- ========= card-style-5 end ========= -->
           </div>
-          <!-- ========== cards-styles end ========== -->
+        </div>
+        </form>
+
+     
+
         </div>
         <!-- end container -->
       </section>
-      <!-- ========== card components end ========== -->
+      <!-- ========== section end ========== -->
 
     </main>
     <!-- ======== main-wrapper end =========== -->
@@ -489,481 +503,6 @@
         calendarMini.render();
       });
 
-      // =========== chart one start
-      const ctx1 = document.getElementById("Chart1").getContext("2d");
-      const chart1 = new Chart(ctx1, {
-        type: "line",
-        data: {
-          labels: [
-            "Jan",
-            "Fab",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-          datasets: [
-            {
-              label: "",
-              backgroundColor: "transparent",
-              borderColor: "#365CF5",
-              data: [
-                600, 800, 750, 880, 940, 880, 900, 770, 920, 890, 976, 1100,
-              ],
-              pointBackgroundColor: "transparent",
-              pointHoverBackgroundColor: "#365CF5",
-              pointBorderColor: "transparent",
-              pointHoverBorderColor: "#fff",
-              pointHoverBorderWidth: 5,
-              borderWidth: 5,
-              pointRadius: 8,
-              pointHoverRadius: 8,
-              cubicInterpolationMode: "monotone", // Add this line for curved line
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            tooltip: {
-              callbacks: {
-                labelColor: function (context) {
-                  return {
-                    backgroundColor: "#ffffff",
-                    color: "#171717"
-                  };
-                },
-              },
-              intersect: false,
-              backgroundColor: "#f9f9f9",
-              title: {
-                fontFamily: "Plus Jakarta Sans",
-                color: "#8F92A1",
-                fontSize: 12,
-              },
-              body: {
-                fontFamily: "Plus Jakarta Sans",
-                color: "#171717",
-                fontStyle: "bold",
-                fontSize: 16,
-              },
-              multiKeyBackground: "transparent",
-              displayColors: false,
-              padding: {
-                x: 30,
-                y: 10,
-              },
-              bodyAlign: "center",
-              titleAlign: "center",
-              titleColor: "#8F92A1",
-              bodyColor: "#171717",
-              bodyFont: {
-                family: "Plus Jakarta Sans",
-                size: "16",
-                weight: "bold",
-              },
-            },
-            legend: {
-              display: false,
-            },
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-          title: {
-            display: false,
-          },
-          scales: {
-            y: {
-              grid: {
-                display: false,
-                drawTicks: false,
-                drawBorder: false,
-              },
-              ticks: {
-                padding: 35,
-                max: 1200,
-                min: 500,
-              },
-            },
-            x: {
-              grid: {
-                drawBorder: false,
-                color: "rgba(143, 146, 161, .1)",
-                zeroLineColor: "rgba(143, 146, 161, .1)",
-              },
-              ticks: {
-                padding: 20,
-              },
-            },
-          },
-        },
-      });
-      // =========== chart one end
-
-      // =========== chart two start
-      const ctx2 = document.getElementById("Chart2").getContext("2d");
-      const chart2 = new Chart(ctx2, {
-        type: "bar",
-        data: {
-          labels: [
-            "Jan",
-            "Fab",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-          datasets: [
-            {
-              label: "",
-              backgroundColor: "#365CF5",
-              borderRadius: 30,
-              barThickness: 6,
-              maxBarThickness: 8,
-              data: [
-                600, 700, 1000, 700, 650, 800, 690, 740, 720, 1120, 876, 900,
-              ],
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            tooltip: {
-              callbacks: {
-                titleColor: function (context) {
-                  return "#8F92A1";
-                },
-                label: function (context) {
-                  let label = context.dataset.label || "";
-
-                  if (label) {
-                    label += ": ";
-                  }
-                  label += context.parsed.y;
-                  return label;
-                },
-              },
-              backgroundColor: "#F3F6F8",
-              titleAlign: "center",
-              bodyAlign: "center",
-              titleFont: {
-                size: 12,
-                weight: "bold",
-                color: "#8F92A1",
-              },
-              bodyFont: {
-                size: 16,
-                weight: "bold",
-                color: "#171717",
-              },
-              displayColors: false,
-              padding: {
-                x: 30,
-                y: 10,
-              },
-          },
-          },
-          legend: {
-            display: false,
-            },
-          legend: {
-            display: false,
-          },
-          layout: {
-            padding: {
-              top: 15,
-              right: 15,
-              bottom: 15,
-              left: 15,
-            },
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              grid: {
-                display: false,
-                drawTicks: false,
-                drawBorder: false,
-              },
-              ticks: {
-                padding: 35,
-                max: 1200,
-                min: 0,
-              },
-            },
-            x: {
-              grid: {
-                display: false,
-                drawBorder: false,
-                color: "rgba(143, 146, 161, .1)",
-                drawTicks: false,
-                zeroLineColor: "rgba(143, 146, 161, .1)",
-              },
-              ticks: {
-                padding: 20,
-              },
-            },
-          },
-          plugins: {
-            legend: {
-              display: false,
-            },
-            title: {
-              display: false,
-            },
-          },
-        },
-      });
-      // =========== chart two end
-
-      // =========== chart three start
-      const ctx3 = document.getElementById("Chart3").getContext("2d");
-      const chart3 = new Chart(ctx3, {
-        type: "line",
-        data: {
-          labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-          datasets: [
-            {
-              label: "Revenue",
-              backgroundColor: "transparent",
-              borderColor: "#365CF5",
-              data: [80, 120, 110, 100, 130, 150, 115, 145, 140, 130, 160, 210],
-              pointBackgroundColor: "transparent",
-              pointHoverBackgroundColor: "#365CF5",
-              pointBorderColor: "transparent",
-              pointHoverBorderColor: "#365CF5",
-              pointHoverBorderWidth: 3,
-              pointBorderWidth: 5,
-              pointRadius: 5,
-              pointHoverRadius: 8,
-              fill: false,
-              tension: 0.4,
-            },
-            {
-              label: "Profit",
-              backgroundColor: "transparent",
-              borderColor: "#9b51e0",
-              data: [
-                120, 160, 150, 140, 165, 210, 135, 155, 170, 140, 130, 200,
-              ],
-              pointBackgroundColor: "transparent",
-              pointHoverBackgroundColor: "#9b51e0",
-              pointBorderColor: "transparent",
-              pointHoverBorderColor: "#9b51e0",
-              pointHoverBorderWidth: 3,
-              pointBorderWidth: 5,
-              pointRadius: 5,
-              pointHoverRadius: 8,
-              fill: false,
-              tension: 0.4,
-            },
-            {
-              label: "Order",
-              backgroundColor: "transparent",
-              borderColor: "#f2994a",
-              data: [180, 110, 140, 135, 100, 90, 145, 115, 100, 110, 115, 150],
-              pointBackgroundColor: "transparent",
-              pointHoverBackgroundColor: "#f2994a",
-              pointBorderColor: "transparent",
-              pointHoverBorderColor: "#f2994a",
-              pointHoverBorderWidth: 3,
-              pointBorderWidth: 5,
-              pointRadius: 5,
-              pointHoverRadius: 8,
-              fill: false,
-              tension: 0.4,
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            tooltip: {
-              intersect: false,
-              backgroundColor: "#fbfbfb",
-              titleColor: "#8F92A1",
-              bodyColor: "#272727",
-              titleFont: {
-                size: 16,
-                family: "Plus Jakarta Sans",
-                weight: "400",
-              },
-              bodyFont: {
-                family: "Plus Jakarta Sans",
-                size: 16,
-              },
-              multiKeyBackground: "transparent",
-              displayColors: false,
-              padding: {
-                x: 30,
-                y: 15,
-              },
-              borderColor: "rgba(143, 146, 161, .1)",
-              borderWidth: 1,
-              enabled: true,
-            },
-            title: {
-              display: false,
-            },
-            legend: {
-              display: false,
-            },
-          },
-          layout: {
-            padding: {
-              top: 0,
-            },
-          },
-          responsive: true,
-          // maintainAspectRatio: false,
-          legend: {
-            display: false,
-          },
-          scales: {
-            y: {
-              grid: {
-                display: false,
-                drawTicks: false,
-                drawBorder: false,
-              },
-              ticks: {
-                padding: 35,
-              },
-              max: 350,
-              min: 50,
-            },
-            x: {
-              grid: {
-                drawBorder: false,
-                color: "rgba(143, 146, 161, .1)",
-                drawTicks: false,
-                zeroLineColor: "rgba(143, 146, 161, .1)",
-              },
-              ticks: {
-                padding: 20,
-              },
-            },
-          },
-        },
-      });
-      // =========== chart three end
-
-      // ================== chart four start
-      const ctx4 = document.getElementById("Chart4").getContext("2d");
-      const chart4 = new Chart(ctx4, {
-        type: "bar",
-        data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-          datasets: [
-            {
-              label: "",
-              backgroundColor: "#365CF5",
-              borderColor: "transparent",
-              borderRadius: 20,
-              borderWidth: 5,
-              barThickness: 20,
-              maxBarThickness: 20,
-              data: [600, 700, 1000, 700, 650, 800],
-            },
-            {
-              label: "",
-              backgroundColor: "#d50100",
-              borderColor: "transparent",
-              borderRadius: 20,
-              borderWidth: 5,
-              barThickness: 20,
-              maxBarThickness: 20,
-              data: [690, 740, 720, 1120, 876, 900],
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            tooltip: {
-              backgroundColor: "#F3F6F8",
-              titleColor: "#8F92A1",
-              titleFontSize: 12,
-              bodyColor: "#171717",
-              bodyFont: {
-                weight: "bold",
-                size: 16,
-              },
-              multiKeyBackground: "transparent",
-              displayColors: false,
-              padding: {
-                x: 30,
-                y: 10,
-              },
-              bodyAlign: "center",
-              titleAlign: "center",
-              enabled: true,
-            },
-            legend: {
-              display: false,
-            },
-          },
-          layout: {
-            padding: {
-              top: 0,
-            },
-          },
-          responsive: true,
-          // maintainAspectRatio: false,
-          title: {
-            display: false,
-          },
-          scales: {
-            y: {
-              grid: {
-                display: false,
-                drawTicks: false,
-                drawBorder: false,
-              },
-              ticks: {
-                padding: 35,
-                max: 1200,
-                min: 0,
-              },
-            },
-            x: {
-              grid: {
-                display: false,
-                drawBorder: false,
-                color: "rgba(143, 146, 161, .1)",
-                zeroLineColor: "rgba(143, 146, 161, .1)",
-              },
-              ticks: {
-                padding: 20,
-              },
-            },
-          },
-        },
-      });
-        // =========== chart four end
     </script>
   </body>
 </html>
