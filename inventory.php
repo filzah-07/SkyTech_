@@ -421,12 +421,11 @@
                   <!-- end input -->
                 </div>
                 <!-- end card -->
-
               <!-- ======= div class="form-elements-wrapper ======= -->
               </div>
-              <!-- end col -->
+
+              <!-- bar chart shape -->
               <div class="col-lg-8">
-            <!-- ======= textarea style start ======= -->
 
             <!-- ========== bar chart starts ========== -->
             <?php
