@@ -494,9 +494,8 @@
                               </tr>
                           </thead>
                           <tbody>
-
                               <?php
-                              // Include your database connection code (connect.php or similar)
+                              // Database connection code
                               include 'connect.php';
 
                               // Query to retrieve data from the parts table
