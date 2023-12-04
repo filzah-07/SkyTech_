@@ -26,136 +26,116 @@
             <div class="col-lg-6">
 
             <?php
-                include "connect.php";
+            include "connect.php";
 
-                $defect_id = "";
-                $defect_type = "";
-                $issue_date = "";
-                $issue_time = "";
-                $defect_description = "";
-                $action_id = "";
-                $action_date = "";
-                $action_time = "";
-                $action_description = "";
-                $status = "";
-                $closed_date = "";
-                $closed_time = "";
+            $defect_id = "";
+            $defect_type = "";
+            $issue_date = "";
+            $issue_time = "";
+            $defect_description = "";
+            $action_id = "";
+            $action_date = "";
+            $action_time = "";
+            $action_description = "";
+            $status = "";
+            $closed_date = "";
+            $closed_time = "";
 
-                $error = "";
-                $success = "";
+            $error = "";
+            $success = "";
 
-                // Check if the defect_id is provided in the URL
-                if (!isset($_GET['defect_id'])) {
-                    header("Location: raiseIssue.php");
-                    exit;
-                }
+            // Check if the defect_id is provided in the URL
+            if (!isset($_GET['defect_id'])) {
+                header("Location: raiseIssue.php");
+                exit;
+            }
 
-                // Retrieve defect_id from the URL
-                $defect_id = $_GET['defect_id'];
+            // Retrieve defect_id from the URL
+            $defect_id = $_GET['defect_id'];
 
-                // Fetch data from the database based on defect_id
-                $sql = "SELECT * FROM defects WHERE defect_id = '$defect_id'";
+            // Fetch data from the database based on defect_id
+            $sql = "SELECT 
+                        defect_id, defect_type, defect_description, action_id, action_description, status,
+                        DATE(issueDateTime) AS issue_date,
+                        TIME(issueDateTime) AS issue_time,
+                        DATE(action_start_time) AS action_date,
+                        TIME(action_start_time) AS action_time,
+                        DATE(closedDateTime) AS closed_date,
+                        TIME(closedDateTime) AS closed_time
+                    FROM defects
+                    WHERE defect_id = '$defect_id'";
+            $result = $mysqli->query($sql);
+
+            // Check if a valid row is retrieved
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+
+                // Assign values to variables
+                $defect_id = $row["defect_id"];
+                $defect_type = $row["defect_type"];
+                $issue_date = $row["issue_date"];
+                $issue_time = $row["issue_time"];
+                $defect_description = $row["defect_description"];
+                $action_id = $row["action_id"];
+                $action_date = $row["action_date"];
+                $action_time = $row["action_time"];
+                $action_description = $row["action_description"];
+                $status = $row["status"];
+                $closed_date = $row["closed_date"];
+                $closed_time = $row["closed_time"];
+            } else {
+                header("Location: raiseIssue.php");
+                exit;
+            }
+
+            // Handle form submission
+            if ($_SERVER["REQUEST_METHOD"] == 'POST') {
+                // Retrieve form data
+                $defect_id = $_POST["defect_id"];
+                $defect_type = $_POST["defect_type"];
+                $issue_date = isset($_POST["issue_date"]) ? $_POST["issue_date"] : $issue_date;
+                $issue_time = isset($_POST["issue_time"]) ? $_POST["issue_time"] : "";
+                $defect_description = $_POST["defect_description"];
+                $action_id = $_POST["action_id"];
+                $action_date = isset($_POST["action_date"]) ? $_POST["action_date"] : $action_date;
+                $action_time = isset($_POST["action_time"]) ? $_POST["action_time"] : "";
+                $action_description = $_POST["action_description"];
+                $status = $_POST["status"];
+                $closed_date = isset($_POST["closed_date"]) ? $_POST["closed_date"] : $closed_date;
+                $closed_time = isset($_POST["closed_time"]) ? $_POST["closed_time"] : "";
+
+                // Combine date and time
+                $issueDateTime = $issue_date . ' ' . $issue_time;
+                $actionStartTime = $action_date . ' ' . $action_time;
+                $closedTimeFinal = $closed_date . ' ' . $closed_time;
+
+                // Update data in the database
+                $sql = "UPDATE defects SET 
+                            defect_type='$defect_type', 
+                            issueDateTime='$issueDateTime', 
+                            defect_description='$defect_description', 
+                            action_id='$action_id', 
+                            action_start_time='$actionStartTime', 
+                            action_description='$action_description', 
+                            status='$status', 
+                            closedDateTime='$closedTimeFinal' 
+                        WHERE defect_id='$defect_id'";
+                
                 $result = $mysqli->query($sql);
 
-                // Check if a valid row is retrieved
-                if ($result->num_rows > 0) {
-                    $row = $result->fetch_assoc();
-
-                    // Assign values to variables
-                    $defect_id = $row["defect_id"];
-                    $defect_type = $row["defect_type"];
-                    
-                    // Check if keys exist before accessing them
-                    $issue_date = isset($row["issue_date"]) ? $row["issue_date"] : "";
-                    $issue_time = isset($row["issue_time"]) ? $row["issue_time"] : "";
-                    
-                    $defect_description = $row["defect_description"];
-                    $action_id = $row["action_id"];
-                    
-                    // Check if keys exist before accessing them
-                    $action_date = isset($row["action_date"]) ? $row["action_date"] : "";
-                    $action_time = isset($row["action_time"]) ? $row["action_time"] : "";
-                    
-                    $action_description = $row["action_description"];
-                    $status = $row["status"];
-                    
-                    // Check if keys exist before accessing them
-                    $closed_date = isset($row["closed_date"]) ? $row["closed_date"] : "";
-                    $closed_time = isset($row["closed_time"]) ? $row["closed_time"] : "";
-                }
-
-                else {
-                    header("Location: raiseIssue.php");
-                    exit;
-                }
-
-                
-                // Separate date and time
-                if (is_array($issue_time)) {
-                    $issue_date = $issue_time[0];
-                    $issue_time = $issue_time[1];
+                if ($result) {
+                    $success = "Issue updated successfully.";
+                    echo '<script>alert("Issue updated successfully."); 
+                        window.location.href = "mainMenu.php";</script>';
                 } else {
-                    $issue_date = "";
-                    $issue_time = "";
+                    $error = "Error updating issue: " . $mysqli->error;
                 }
-                if (is_array($action_time)) {
-                    $action_date = $action_time[0];
-                    $action_time = $action_time[1];
-                } else {
-                    $action_date = "";
-                    $action_time = "";
-                }
-                if (is_array($closed_time)) {
-                    $closed_date = $closed_time[0];
-                    $closed_time = $closed_time[1];
-                } else {
-                    $closed_date = "";
-                    $closed_time = "";
-                }
+            }
+            ?>
 
 
-                // Handle form submission
-                if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-                    // Retrieve form data
-                    $defect_id = $_POST["defect_id"];
-                    $defect_type = $_POST["defect_type"];
-                    $issue_date = isset($_POST["issue_date"]) ? $_POST["issue_date"] : $issue_date;
-                    $issue_time = isset($_POST["issue_time"]) ? $_POST["issue_time"] : "";
-                    $defect_description = $_POST["defect_description"];
-                    $action_id = $_POST["action_id"];
-                    $action_date = isset($_POST["action_date"]) ? $_POST["action_date"] : $action_date;
-                    $action_time = isset($_POST["action_time"]) ? $_POST["action_time"] : "";
-                    $action_description = $_POST["action_description"];
-                    $status = $_POST["status"];
-                    $closed_date = isset($_POST["closed_date"]) ? $_POST["closed_date"] : $closed_date;
-                    $closed_time = isset($_POST["closed_time"]) ? $_POST["closed_time"] : "";
-
-                    // Debug output
-                    var_dump($_POST);
-
-                    // Combine date and time
-                    $issueDateTime = $issue_date . ' ' . $issue_time;
-                    $actionStartTime = $action_date . ' ' . $action_time;
-                    $closedTimeFinal = $closed_date . ' ' . $closed_time;
-
-                    // Update data in the database
-                    $sql = "UPDATE defects SET defect_type='$defect_type', issue_date='$issue_date', issue_time='$issue_time', defect_description='$defect_description', action_id='$action_id', action_date='$action_date', action_time='$action_time', action_description='$action_description', status='$status', closed_date='$closed_date', closed_time='$closed_time' WHERE defect_id='$defect_id'";
-                    
-                    $result = $mysqli->query($sql);
-
-                    if ($result) {
-                        $success = "Issue updated successfully.";
-                        echo '<script>alert("Issue updated successfully."); 
-                            window.location.href = "mainMenu.php";</script>';
-                    } else {
-                        $error = "Error updating issue: " . $mysqli->error;
-                    }
-                }
-                ?>
-
-    
                 <!-- Form Structure -->
-                <h2 class="text-center mb-4">Update Issue/Defect Form</h2>
+                <h2 class="text-center mb-4" style="margin-top: 20px;">Update Issue/Defect Form</h2>
                 <form action="" method="post">
                     <div class="form-elements-wrapper">
                         <div class="card-style mb-30">
@@ -198,8 +178,9 @@
                                 </div> 
                                 <div class="input-style-2">
                                     <label>DEFECT DESCRIPTION</label>
-                                    <textarea name="defect_description" placeholder="PLEASE DESCRIBE THE DEFECTS HERE..." rows="5" required><?php echo $defect_description; ?>"</textarea>
+                                    <textarea name="defect_description" placeholder="TYPE HERE..." rows="5" required><?php echo $defect_description; ?></textarea>
                                     <small class="form-text text-danger">* This field is required.</small>
+
                                 </div>
 
                                 <!-- Add a horizontal line to separate sections -->
@@ -226,7 +207,7 @@
                                 </div>
                                 <div class="input-style-2">
                                     <label>ACTION DESCRIPTION</label>
-                                    <textarea name="action_description" placeholder="PLEASE DESCRIBE THE ACTION THAT HAVE BEEN TAKE..." rows="5"><?php echo $action_description; ?>"</textarea>
+                                    <textarea name="action_description" placeholder="TYPE HERE..." rows="5"><?php echo $action_description; ?></textarea>
                                 </div>
 
                         <!-- Add a horizontal line to separate sections -->
