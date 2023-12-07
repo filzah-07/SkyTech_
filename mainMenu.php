@@ -340,9 +340,9 @@
               <div class="col-lg-4">
                 <!-- input style start -->
                 <div class="icon-card mb-30">
-                        <div class="icon purple">
-                          <i class="lni lni-cart-full"></i>
-                        </div>
+                        <!-- <div class="icon purple">
+                          <!-- <i class="lni lni-cart-full"></i> -->
+                        <!-- </div> -->
                         <div class="content">
                             <h6 class="mb-10">PILOT</h6>
                             <h3 class="text-bold mb-10"><?php echo $counts['PILOT']; ?></h3>
@@ -354,9 +354,9 @@
 
                 <!-- ======= select style start ======= -->
                 <div class="icon-card mb-30">
-                        <div class="icon success">
-                            <i class="lni lni-dollar"></i>
-                        </div>
+                        <!-- <div class="icon success">
+                           <i class="lni lni-dollar"></i> -->
+                        <!-- </div> -->
                         <div class="content">
                             <h6 class="mb-10">MAINTENANCE</h6>
                             <h3 class="text-bold mb-10"><?php echo $counts['MAINTENANCE']; ?></h3>
@@ -368,9 +368,9 @@
 
                 <!-- ======= select style start ======= -->
                 <div class="card-style mb-30">
-                        <div class="icon primary">
+                        <!-- <div class="icon primary">
                             <i class="lni lni-credit-cards"></i>
-                        </div>
+                        </div> -->
                         <div class="content">
                             <h6 class="mb-10">CABIN</h6>
                             <h3 class="text-bold mb-10"><?php echo $counts['CABIN']; ?></h3>

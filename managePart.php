@@ -400,9 +400,14 @@
                         <small class="form-text text-danger">* This field is required.</small>
                     </div>
                     </div>
-                      <div class="button-container">
-                        <button type="submit" class="main-btn primary-btn rounded-full btn-hover">Submit</button>
-                      </div>
+                    <div class="button-container row">
+                            <div class="col-md-6">
+                                <button type="submit" class="main-btn primary-btn rounded-full btn-hover">Submit</button> 
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="main-btn danger-btn rounded-full btn-hover" id="cancelButton">Cancel</button>
+                            </div>
+                    </div>
                 </div>
               </div>
           </div>
@@ -431,6 +436,13 @@
     <script src="assets/js/main.js"></script>
 
     <script>
+
+      // JavaScript to handle the cancel button click
+        document.getElementById('cancelButton').addEventListener('click', function() {
+        // You can redirect the user to another page or perform any other action
+        window.location.href = "toDo.php";
+        });
+
       // ======== jvectormap activation
       var markers = [
         { name: "Egypt", coords: [26.8206, 30.8025] },
