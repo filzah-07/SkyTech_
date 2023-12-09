@@ -56,7 +56,7 @@
                   d="M8.74999 18.3333C12.2376 18.3333 15.1364 15.8128 15.7244 12.4941C15.8448 11.8143 15.2737 11.25 14.5833 11.25H9.99999C9.30966 11.25 8.74999 10.6903 8.74999 10V5.41666C8.74999 4.7263 8.18563 4.15512 7.50586 4.27556C4.18711 4.86357 1.66666 7.76243 1.66666 11.25C1.66666 15.162 4.83797 18.3333 8.74999 18.3333Z" /> 
               </svg>
             </span>
-            <span class="text">Problem Classifications</span>
+            <span class="text">Issues</span>
           </a>
         </li>
         <!-- Dashboard Starts -->  
@@ -172,7 +172,7 @@
             <div class="row align-items-center">
               <div class="col-md-6">
                 <div class="title">
-                  <h2>Problem Classification</h2>
+                  <h2>Problem Category</h2>
                 </div>
               </div>
               <!-- end col -->
@@ -184,7 +184,7 @@
                         <a href="#0">Dashboard</a>
                       </li>
                       <li class="breadcrumb-item active" aria-current="page">
-                      Problem Classification
+                      Problem Category
                       </li>
                     </ol>
                   </nav>
@@ -488,21 +488,21 @@
 
     <script>
 
-// ==== Filter status === //    
-function filterTable(selectedStatus) {
-            $.ajax({
-                url: 'filter_status.php', 
-                type: 'POST',
-                data: { status: selectedStatus },
-                success: function(response) {
-                    // Update the table body with the filtered data
-                    $('#tableBody').html(response);
-                },
-                error: function(error) {
-                    console.error('Error fetching filtered data:', error);
-                }
-            });
-        }
+    // ==== Filter status === //    
+    function filterTable(selectedStatus) {
+                $.ajax({
+                    url: 'filter_status.php', 
+                    type: 'POST',
+                    data: { status: selectedStatus },
+                    success: function(response) {
+                        // Update the table body with the filtered data
+                        $('#tableBody').html(response);
+                    },
+                    error: function(error) {
+                        console.error('Error fetching filtered data:', error);
+                    }
+                });
+            }
 
       // ==== Log Out === //
       function logoutConfirmation(logoutURL) {
@@ -546,15 +546,15 @@ function filterTable(selectedStatus) {
               });
 
       //scroll data table
-      // new DataTable('#defectTable', {
-      //     scrollX: true
-      // });
+      new DataTable('#defectTable', {
+          scrollX: true
+      });
   
       //static data table
-      $(document).ready(function () {
-        // Initialize DataTable
-        $('#yourTableId').DataTable();
-    });
+    //   $(document).ready(function () {
+    //     // Initialize DataTable
+    //     $('#yourTableId').DataTable();
+    // });
 
     </script>
   </body>

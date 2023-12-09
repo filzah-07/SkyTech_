@@ -67,7 +67,7 @@
                   d="M8.74999 18.3333C12.2376 18.3333 15.1364 15.8128 15.7244 12.4941C15.8448 11.8143 15.2737 11.25 14.5833 11.25H9.99999C9.30966 11.25 8.74999 10.6903 8.74999 10V5.41666C8.74999 4.7263 8.18563 4.15512 7.50586 4.27556C4.18711 4.86357 1.66666 7.76243 1.66666 11.25C1.66666 15.162 4.83797 18.3333 8.74999 18.3333Z" /> 
               </svg>
             </span>
-            <span class="text">Problem Classifications</span>
+            <span class="text">Issues</span>
           </a>
       </li>
       <!-- Dashboard Starts -->  
@@ -238,11 +238,11 @@
                     </a>
                   </div>
                   <div class="card-content">
-                    <h4><a href="raiseIssue.php">Raise Issue</a></h4>
+                    <h4><a href="raiseIssue.php">Add Issue</a></h4>
                     <p>
-                    User can fill this form which designed to report and document various issues or defects related to the inventory.
+                    User can fill this form which designed to collect various issues or defects related to the inventory.
                     </p>
-                    <a href="raiseIssue.php" class="main-btn primary-btn btn-hover">Raise Issue</a>
+                    <a href="raiseIssue.php" class="main-btn primary-btn btn-hover">Add Issue</a>
                   </div>
                 </div>
                 <!-- end card -->

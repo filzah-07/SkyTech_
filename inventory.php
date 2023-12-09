@@ -47,7 +47,7 @@
                   d="M8.74999 18.3333C12.2376 18.3333 15.1364 15.8128 15.7244 12.4941C15.8448 11.8143 15.2737 11.25 14.5833 11.25H9.99999C9.30966 11.25 8.74999 10.6903 8.74999 10V5.41666C8.74999 4.7263 8.18563 4.15512 7.50586 4.27556C4.18711 4.86357 1.66666 7.76243 1.66666 11.25C1.66666 15.162 4.83797 18.3333 8.74999 18.3333Z" /> 
               </svg>
             </span>
-            <span class="text">Problem Classifications</span>
+            <span class="text">Issues</span>
           </a>
       </li>
       <!-- Dashboard Starts -->  
@@ -321,22 +321,20 @@
               </div>
 
                   <div class="table-wrapper table-responsive">
-                      <table class="table">
+                  <div class="table-scroll-x">
+                      <table id="inventoryTable" class="table" style="width:100%">
                           <thead>
                               <tr>
-                              <th style="width: 10%;" class="lead-text">
-                                  <h6>NO</h6>
-                                  </th>
-                                  <th style="width: 10%;" class="lead-info">
+                                  <th style="width: 20%;" >
                                       <h6>PART NO</h6>
                                   </th>
-                                  <th style="width: 10%;" class="lead-info">
+                                  <th style="width: 20%;" >
                                       <h6>PART MATCH</h6>
                                   </th>
-                                  <th class="lead-info">
+                                  <th style="width: 40%;" >
                                       <h6>DESCRIPTION</h6>
                                   </th>
-                                  <th style="width: 10%;" class="lead-info">
+                                  <th style="width: 20%;" >
                                       <h6>MATERIAL CLASS</h6>
                                   </th>
                                   <th>
@@ -359,13 +357,6 @@
                                   // Fetch each row from the result set
                                   while ($row = $result->fetch_assoc()) {
                                       echo '<tr>';
-                                      echo '<td class="min-width">';
-                                      echo '<div class="lead">';
-                                      echo '<div class="lead-text">';
-                                      echo '<p>' . $row['part_id'] . '</p>';
-                                      echo '</div>';
-                                      echo '</div>';
-                                      echo '</td>';
                                       echo '<td class="min-width">';
                                       echo '<p><a href="#0">' . $row['part_no'] . '</a></p>';
                                       echo '</td>';
@@ -507,6 +498,17 @@
         function confirmDelete() {
         return confirm("Are you sure you want to delete this entry?");
       }
+
+            //scroll data table
+      new DataTable('#inventoryTable', {
+          scrollX: true
+      });
+  
+      //static data table
+    //   $(document).ready(function () {
+    //     // Initialize DataTable
+    //     $('#inventory').DataTable();
+    // });
 
       // ======== jvectormap activation
       var markers = [
