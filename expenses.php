@@ -609,7 +609,7 @@
               datasets: [
                   {
                       label: "Total Spent (RM)",
-                      backgroundColor: "#365CF5",
+                      backgroundColor: "#a8ec0c",
                       borderRadius: 30,
                       barThickness: 6,
                       maxBarThickness: 8,
