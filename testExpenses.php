@@ -188,141 +188,45 @@
           </div>
           <!-- ========== title-wrapper end ========== -->
 
-          <!-- ========== EXPENSES LABEL ========== -->
           <?php
-            include 'connect.php';
+          $host = 'localhost';
+          $dbname = 'fyp';
+          $username = 'root';
+          $password = '';
 
-            // Function to format the currency as RM
-            function formatCurrency($amount) {
-                return 'RM ' . number_format($amount, 2);
-            }
+          try {
+              $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+              $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          } catch (PDOException $e) {
+              die("Error: " . $e->getMessage());
+          }
 
-            // Years to display
-            $years = [2021, 2022, 2023];
+          // SQL query to get monthly sum of average_price
+          $sql = "
+              SELECT
+                  MONTH(date) AS month,
+                  YEAR(date) AS year,
+                  SUM(average_price) AS total_average_price
+              FROM
+                  expenses
+              GROUP BY
+                  YEAR(date),
+                  MONTH(date)
+              ORDER BY
+                  YEAR(date) DESC,
+                  MONTH(date) ASC;
+          ";
 
-            foreach ($years as $year) {
-              // Query to get the sum of average_price for the specific year
-              $query = "SELECT SUM(average_price) AS total_price FROM expenses WHERE YEAR(date) = $year";
-              $result = $mysqli->query($query);
+          // Execute the query
+          $stmt = $pdo->prepare($sql);
+          $stmt->execute();
+          $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-              // Check if the query was successful
-              if ($result) {
-                  $row = $result->fetch_assoc();
-                  $sumAveragePrice = $row['total_price'];
+          // Convert the result to JSON
+          $jsonData = json_encode($result);
+          ?>
 
-                  // Format the sum as RM
-                  $formattedSum = formatCurrency($sumAveragePrice);
-
-                  // Check the current year and display the result accordingly
-                  if ($year == 2021) {
-                      echo '<div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="icon-card mb-30">
-                                    <div class="icon orange">
-                                        <i class="lni lni-money-location"></i>
-                                    </div>
-                                    <div class="content">
-                                        <h6 class="mb-10">Total Expenses (' . $year . ')</h6>
-                                        <h3 class="text-bold mb-10">' . $formattedSum . '</h3>
-                                    </div>
-                                </div> 
-                            </div>';
-                  } elseif ($year == 2022) {
-                      echo '
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="icon-card mb-30">
-                                    <div class="icon purple">
-                                        <i class="lni lni-money-location"></i>
-                                    </div>
-                                    <div class="content">
-                                        <h6 class="mb-10">Total Expenses (' . $year . ')</h6>
-                                        <h3 class="text-bold mb-10">' . $formattedSum . '</h3>
-                                    </div>
-                                </div>             
-                            </div>';
-                  } elseif ($year == 2023) {
-                      echo '
-                          <div class="col-lg-4 col-md-6 col-sm-12">
-                              <div class="icon-card mb-30">
-                                  <div class="icon blue">
-                                      <i class="lni lni-money-location"></i>
-                                  </div>
-                                  <div class="content">
-                                      <h6 class="mb-10">Total Expenses (' . $year . ')</h6>
-                                      <h3 class="text-bold mb-10">' . $formattedSum . '</h3>
-                                  </div>
-                              </div>
-                          </div> 
-                          </div>';
-                  }
-              } else {
-                  echo "Error: " . $mysqli->error;
-              }
-            }
-
-            // Close the connection
-            $mysqli->close();
-            ?>
-            <!-- ========== EXPENSES LABEL END ========== -->
-
-            <!-- ========== EXPENSES LINE CHART ========== -->
-            <?php
-            include 'connect.php';
-
-            // Array to store data for each year
-            $dataByYear = [];
-
-            // Query to get the sum of average_price for each year
-            $query = "SELECT YEAR(date) AS year, SUM(average_price) AS total_price FROM expenses GROUP BY YEAR(date)";
-            $result = $mysqli->query($query);
-
-            if ($result) {
-                while ($row = $result->fetch_assoc()) {
-                    // Store the data in the array
-                    $dataByYear[$row['year']] = $row['total_price'];
-                }
-
-                // Close the result set
-                $result->close();
-            } else {
-                echo "Error: " . $mysqli->error;
-            }
-
-            // Close the connection
-            $mysqli->close();
-            ?>
-
-          
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="card-style mb-30">
-                <div class="title d-flex flex-wrap justify-content-between">
-                  <div class="left">
-                  <h6 class="text-medium mb-10"></h6>
-                    <h3 class="text-bold">Overall Expenses (Yearly)</h3>
-                  </div>
-                  <div class="right">
-                    <div class="select-style-1">
-                      <div class="select-position select-sm">
-                        <select class="light-bg">
-                          <option value="">All</option>
-                          <option value="">Rotable</option>
-                        </select>
-                      </div>
-                    </div>
-                    <!-- end select -->
-                  </div>
-                </div>
-                <!-- End Title -->
-                <div class="chart">
-                  <canvas id="Chart1" style="width: 100%; height: 400px; margin-left: -35px;"></canvas>
-                </div>
-                <!-- End Chart -->
-              </div>
-            </div>
-            <!-- End Col -->
-
-            
+            <div class="row">
             <div class="col-lg-6">
               <div class="card-style mb-30">
                 <div class="title d-flex flex-wrap align-items-center justify-content-between">
@@ -334,12 +238,13 @@
                     <div class="select-style-1">
                       <div class="select-position select-sm">
                         <select id="yearSelect" class="light-bg">
-                            <option value="">Year</option>
-                            <option value="2023">2023</option>
+                            <option value=""disabled>Select a year</option>
+                            <option value="2023" selected>2023</option>
                             <option value="2022">2022</option>
                             <option value="2021">2021</option>
                             <option value="2020">2020</option>
                             <option value="2019">2019</option>
+                            <option value="2018">2018</option>
                         </select>
                       </div>
                     </div>
@@ -358,57 +263,6 @@
           <!-- End Row -->
           
 
-            <div class="row">
-                <div class="col-lg-12">
-                  <div class="card-style mb-30">
-                    <div class="title d-flex flex-wrap align-items-center justify-content-between">
-                      <div class="left">
-                        <h6 class="text-medium mb-2">Expenses Forecast</h6>
-                      </div>
-                      <div class="right">
-                        <div class="select-style-1 mb-2">
-                          <div class="select-position select-sm">
-                            <select class="light-bg">
-                              <option value="">Last Month</option>
-                              <option value="">Last 3 Months</option>
-                              <option value="">Last Year</option>
-                            </select>
-                          </div>
-                        </div>
-                        <!-- end select -->
-                      </div>
-                    </div>
-                    <!-- End Title -->
-                    <div class="chart">
-                      <div id="legend3">
-                        <ul class="legend3 d-flex flex-wrap align-items-center mb-30">
-                          <li>
-                            <div class="d-flex">
-                              <span class="bg-color primary-bg"> </span>
-                              <div class="text">
-                                <p class="text-sm text-success">
-                                  <span class="text-dark">Prediction (RM)</span>
-                                </p>
-                              </div>
-                            </div>
-                          </li>
-                          <li>
-                            <div class="d-flex">
-                              <span class="bg-color orange-bg"></span>
-                              <div class="text">
-                                <p class="text-sm text-danger">
-                                  <span class="text-dark">Actual (RM)</span>
-                                </p>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                      <canvas id="Chart3" style="width: 100%; height: 450px; margin-left: -35px;"></canvas>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Col -->
 
         </div>
         <!-- end container -->
@@ -441,138 +295,41 @@
             }
       }
  
-      // =========== chart one start
-      const ctx1 = document.getElementById("Chart1").getContext("2d");
-      const chart1 = new Chart(ctx1, {
-        type: "line",
-        data: {
-        labels: Object.keys(<?php echo json_encode($dataByYear); ?>),
-        datasets: [
-          {
-            label: "RM",
-            backgroundColor: "transparent",
-            borderColor: "#365CF5",
-            data: Object.values(<?php echo json_encode($dataByYear); ?>),
-            pointBackgroundColor: "transparent",
-            pointHoverBackgroundColor: "#365CF5",
-            pointBorderColor: "transparent",
-            pointHoverBorderColor: "#fff",
-            pointHoverBorderWidth: 5,
-            borderWidth: 5,
-            pointRadius: 8,
-            pointHoverRadius: 8,
-            cubicInterpolationMode: "monotone",
-          },
-        ],
-      },
-        options: {
-          plugins: {
-            tooltip: {
-              callbacks: {
-                labelColor: function (context) {
-                  return {
-                    backgroundColor: "#ffffff",
-                    color: "#171717"
-                  };
-                },
-              },
-              intersect: false,
-              backgroundColor: "#f9f9f9",
-              title: {
-                fontFamily: "Plus Jakarta Sans",
-                color: "#8F92A1",
-                fontSize: 12,
-              },
-              body: {
-                fontFamily: "Plus Jakarta Sans",
-                color: "#171717",
-                fontStyle: "bold",
-                fontSize: 16,
-              },
-              multiKeyBackground: "transparent",
-              displayColors: false,
-              padding: {
-                x: 30,
-                y: 10,
-              },
-              bodyAlign: "center",
-              titleAlign: "center",
-              titleColor: "#8F92A1",
-              bodyColor: "#171717",
-              bodyFont: {
-                family: "Plus Jakarta Sans",
-                size: "16",
-                weight: "bold",
-              },
-            },
-            legend: {
-              display: false,
-            },
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-          title: {
-            display: false,
-          },
-          scales: {
-            y: {
-              grid: {
-                display: false,
-                drawTicks: false,
-                drawBorder: false,
-              },
-              ticks: {
-                padding: 35,
-                max: 1200,
-                min: 500,
-              },
-            },
-            x: {
-              grid: {
-                drawBorder: false,
-                color: "rgba(143, 146, 161, .1)",
-                zeroLineColor: "rgba(143, 146, 161, .1)",
-              },
-              ticks: {
-                padding: 20,
-              },
-            },
-          },
-        },
-      });
-      // =========== chart one end
 
       // =========== chart two start
-      const ctx2 = document.getElementById("Chart2").getContext("2d");
-      const chart2 = new Chart(ctx2, {
+      document.addEventListener('DOMContentLoaded', function () {
+    // Use the JSON data fetched from PHP
+    var chartData = <?php echo $jsonData; ?>;
+
+    // Process the data to match your Chart.js structure
+    var chartLabels = chartData.map(item => item.month);
+    var chartValues = chartData.map(item => item.total_average_price);
+
+    // Convert numerical month values to string representations
+    var monthNames = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+
+    // Map numerical month values to string representations
+    chartLabels = chartLabels.map(month => monthNames[month - 1]);
+
+    // =========== chart two start
+    const ctx2 = document.getElementById("Chart2").getContext("2d");
+    const chart2 = new Chart(ctx2, {
         type: "bar",
         data: {
-          labels: [
-            "Jan",
-            "Fab",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-          datasets: [
-            {
-              label: "",
-              backgroundColor: "#365CF5",
-              borderRadius: 30,
-              barThickness: 6,
-              maxBarThickness: 8,
-              data: [
-                600, 700, 1000, 700, 650, 800, 690, 740, 720, 1120, 876, 900,
-              ],
-            },
-          ],
+            labels: chartLabels,
+            datasets: [
+                {
+                    label: "Total Average Price",
+                    backgroundColor: "#365CF5",
+                    borderRadius: 30,
+                    barThickness: 6,
+                    maxBarThickness: 8,
+                    data: chartValues,
+                },
+            ],
         },
         options: {
           plugins: {
@@ -665,224 +422,43 @@
       });
       // =========== chart two end
 
-      // =========== chart three start
-      const ctx3 = document.getElementById("Chart3").getContext("2d");
-      const chart3 = new Chart(ctx3, {
-        type: "line",
-        data: {
-          labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-          datasets: [
-            {
-              label: "Prediction (RM)",
-              backgroundColor: "transparent",
-              borderColor: "#365CF5",
-              data: [80, 120, 110, 100, 130, 150, 115, 145, 140, 130, 160, 210],
-              pointBackgroundColor: "transparent",
-              pointHoverBackgroundColor: "#365CF5",
-              pointBorderColor: "transparent",
-              pointHoverBorderColor: "#365CF5",
-              pointHoverBorderWidth: 3,
-              pointBorderWidth: 5,
-              pointRadius: 5,
-              pointHoverRadius: 8,
-              fill: false,
-              tension: 0.4,
-            }, 
-            {
-              label: "Actual (RM)",
-              backgroundColor: "transparent",
-              borderColor: "#f2994a",
-              data: [180, 110, 140, 135, 100, 90, 145, 115, 100, 110, 115, 150],
-              pointBackgroundColor: "transparent",
-              pointHoverBackgroundColor: "#f2994a",
-              pointBorderColor: "transparent",
-              pointHoverBorderColor: "#f2994a",
-              pointHoverBorderWidth: 3,
-              pointBorderWidth: 5,
-              pointRadius: 5,
-              pointHoverRadius: 8,
-              fill: false,
-              tension: 0.4,
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            tooltip: {
-              intersect: false,
-              backgroundColor: "#fbfbfb",
-              titleColor: "#8F92A1",
-              bodyColor: "#272727",
-              titleFont: {
-                size: 16,
-                family: "Plus Jakarta Sans",
-                weight: "400",
-              },
-              bodyFont: {
-                family: "Plus Jakarta Sans",
-                size: 16,
-              },
-              multiKeyBackground: "transparent",
-              displayColors: false,
-              padding: {
-                x: 30,
-                y: 15,
-              },
-              borderColor: "rgba(143, 146, 161, .1)",
-              borderWidth: 1,
-              enabled: true,
-            },
-            title: {
-              display: false,
-            },
-            legend: {
-              display: false,
-            },
-          },
-          layout: {
-            padding: {
-              top: 0,
-            },
-          },
-          responsive: true,
-          // maintainAspectRatio: false,
-          legend: {
-            display: false,
-          },
-          scales: {
-            y: {
-              grid: {
-                display: false,
-                drawTicks: false,
-                drawBorder: false,
-              },
-              ticks: {
-                padding: 35,
-              },
-              max: 350,
-              min: 50,
-            },
-            x: {
-              grid: {
-                drawBorder: false,
-                color: "rgba(143, 146, 161, .1)",
-                drawTicks: false,
-                zeroLineColor: "rgba(143, 146, 161, .1)",
-              },
-              ticks: {
-                padding: 20,
-              },
-            },
-          },
-        },
-      });
-      // =========== chart three end
+      
 
-      // ================== chart four start
-      const ctx4 = document.getElementById("Chart4").getContext("2d");
-      const chart4 = new Chart(ctx4, {
-        type: "bar",
-        data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-          datasets: [
-            {
-              label: "",
-              backgroundColor: "#365CF5",
-              borderColor: "transparent",
-              borderRadius: 20,
-              borderWidth: 5,
-              barThickness: 20,
-              maxBarThickness: 20,
-              data: [600, 700, 1000, 700, 650, 800],
-            },
-            {
-              label: "",
-              backgroundColor: "#d50100",
-              borderColor: "transparent",
-              borderRadius: 20,
-              borderWidth: 5,
-              barThickness: 20,
-              maxBarThickness: 20,
-              data: [690, 740, 720, 1120, 876, 900],
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            tooltip: {
-              backgroundColor: "#F3F6F8",
-              titleColor: "#8F92A1",
-              titleFontSize: 12,
-              bodyColor: "#171717",
-              bodyFont: {
-                weight: "bold",
-                size: 16,
-              },
-              multiKeyBackground: "transparent",
-              displayColors: false,
-              padding: {
-                x: 30,
-                y: 10,
-              },
-              bodyAlign: "center",
-              titleAlign: "center",
-              enabled: true,
-            },
-            legend: {
-              display: false,
-            },
-          },
-          layout: {
-            padding: {
-              top: 0,
-            },
-          },
-          responsive: true,
-          // maintainAspectRatio: false,
-          title: {
-            display: false,
-          },
-          scales: {
-            y: {
-              grid: {
-                display: false,
-                drawTicks: false,
-                drawBorder: false,
-              },
-              ticks: {
-                padding: 35,
-                max: 1200,
-                min: 0,
-              },
-            },
-            x: {
-              grid: {
-                display: false,
-                drawBorder: false,
-                color: "rgba(143, 146, 161, .1)",
-                zeroLineColor: "rgba(143, 146, 161, .1)",
-              },
-              ticks: {
-                padding: 20,
-              },
-            },
-          },
-        },
-      });
-        // =========== chart four end
+  // Set the default value of the yearSelect dropdown to "2023"
+  document.getElementById('yearSelect').value = "2023";
+
+// Trigger the change event to update the chart based on the default value
+updateChart("2023");
+
+// Add an event listener to the yearSelect dropdown
+document.getElementById('yearSelect').addEventListener('change', function () {
+    var selectedYear = this.value;
+
+    // Update the chart based on the selected year
+    updateChart(selectedYear);
+});
+
+// Function to update the chart based on the selected year
+function updateChart(selectedYear) {
+    // Filter the chartData based on the selected year
+    var filteredData = chartData.filter(item => item.year == selectedYear);
+
+    // Update the chart labels and values
+    var chartLabels = filteredData.map(item => item.month);
+    var chartValues = filteredData.map(item => item.total_average_price);
+
+    // Convert numerical month values to string representations
+    chartLabels = chartLabels.map(month => monthNames[month - 1]);
+
+    // Update the chart data
+    chart2.data.labels = chartLabels;
+    chart2.data.datasets[0].data = chartValues;
+
+    // Update the chart
+    chart2.update();
+}
+});
+
     </script>
   </body>
 </html>

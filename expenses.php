@@ -321,8 +321,47 @@
               </div>
             </div>
             <!-- End Col -->
+            <!-- ========== EXPENSES LINE CHART ENDS ========== -->
 
-            
+            <!-- ========== EXPENSES BAR CHART ========== -->
+            <?php
+            $host = 'localhost';
+            $dbname = 'fyp';
+            $username = 'root';
+            $password = '';
+
+            try {
+                $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                die("Error: " . $e->getMessage());
+            }
+
+            // SQL query to get monthly sum of average_price
+            $sql = "
+                SELECT
+                    MONTH(date) AS month,
+                    YEAR(date) AS year,
+                    SUM(average_price) AS total_average_price
+                FROM
+                    expenses
+                GROUP BY
+                    YEAR(date),
+                    MONTH(date)
+                ORDER BY
+                    YEAR(date) DESC,
+                    MONTH(date) ASC;
+            ";
+
+            // Execute the query
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Convert the result to JSON
+            $jsonData = json_encode($result);
+            ?>
+
             <div class="col-lg-6">
               <div class="card-style mb-30">
                 <div class="title d-flex flex-wrap align-items-center justify-content-between">
@@ -334,12 +373,13 @@
                     <div class="select-style-1">
                       <div class="select-position select-sm">
                         <select id="yearSelect" class="light-bg">
-                            <option value="">Year</option>
-                            <option value="2023">2023</option>
+                            <option value=""disabled>Select a year</option>
+                            <option value="2023" selected>2023</option>
                             <option value="2022">2022</option>
                             <option value="2021">2021</option>
                             <option value="2020">2020</option>
                             <option value="2019">2019</option>
+                            <option value="2018">2018</option>
                         </select>
                       </div>
                     </div>
@@ -542,128 +582,166 @@
       });
       // =========== chart one end
 
-      // =========== chart two start
+      // =========== chart two start (LOAD BACKEND)
+      document.addEventListener('DOMContentLoaded', function () {
+      // Use the JSON data fetched from PHP
+      var chartData = <?php echo $jsonData; ?>;
+
+      // Process the data to match your Chart.js structure
+      var chartLabels = chartData.map(item => item.month);
+      var chartValues = chartData.map(item => item.total_average_price);
+
+      // Convert numerical month values to string representations
+      var monthNames = [
+          "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      ];
+
+      // Map numerical month values to string representations
+      chartLabels = chartLabels.map(month => monthNames[month - 1]);
+
+      // =========== chart two start (LOAD CONTENT)
       const ctx2 = document.getElementById("Chart2").getContext("2d");
       const chart2 = new Chart(ctx2, {
-        type: "bar",
-        data: {
-          labels: [
-            "Jan",
-            "Fab",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-          datasets: [
-            {
-              label: "",
-              backgroundColor: "#365CF5",
-              borderRadius: 30,
-              barThickness: 6,
-              maxBarThickness: 8,
-              data: [
-                600, 700, 1000, 700, 650, 800, 690, 740, 720, 1120, 876, 900,
+          type: "bar",
+          data: {
+              labels: chartLabels,
+              datasets: [
+                  {
+                      label: "Total Spent (RM)",
+                      backgroundColor: "#365CF5",
+                      borderRadius: 30,
+                      barThickness: 6,
+                      maxBarThickness: 8,
+                      data: chartValues,
+                  },
               ],
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            tooltip: {
-              callbacks: {
-                titleColor: function (context) {
-                  return "#8F92A1";
-                },
-                label: function (context) {
-                  let label = context.dataset.label || "";
+          },
+          options: {
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  titleColor: function (context) {
+                    return "#8F92A1";
+                  },
+                  label: function (context) {
+                    let label = context.dataset.label || "";
 
-                  if (label) {
-                    label += ": ";
-                  }
-                  label += context.parsed.y;
-                  return label;
+                    if (label) {
+                      label += ": ";
+                    }
+                    label += context.parsed.y;
+                    return label;
+                  },
                 },
-              },
-              backgroundColor: "#F3F6F8",
-              titleAlign: "center",
-              bodyAlign: "center",
-              titleFont: {
-                size: 12,
-                weight: "bold",
-                color: "#8F92A1",
-              },
-              bodyFont: {
-                size: 16,
-                weight: "bold",
-                color: "#171717",
-              },
-              displayColors: false,
-              padding: {
-                x: 30,
-                y: 10,
-              },
-          },
-          },
-          legend: {
-            display: false,
+                backgroundColor: "#F3F6F8",
+                titleAlign: "center",
+                bodyAlign: "center",
+                titleFont: {
+                  size: 12,
+                  weight: "bold",
+                  color: "#8F92A1",
+                },
+                bodyFont: {
+                  size: 16,
+                  weight: "bold",
+                  color: "#171717",
+                },
+                displayColors: false,
+                padding: {
+                  x: 30,
+                  y: 10,
+                },
             },
-          legend: {
-            display: false,
-          },
-          layout: {
-            padding: {
-              top: 15,
-              right: 15,
-              bottom: 15,
-              left: 15,
             },
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              grid: {
-                display: false,
-                drawTicks: false,
-                drawBorder: false,
+            legend: {
+              display: false,
               },
-              ticks: {
-                padding: 35,
-                max: 1200,
-                min: 0,
-              },
-            },
-            x: {
-              grid: {
-                display: false,
-                drawBorder: false,
-                color: "rgba(143, 146, 161, .1)",
-                drawTicks: false,
-                zeroLineColor: "rgba(143, 146, 161, .1)",
-              },
-              ticks: {
-                padding: 20,
-              },
-            },
-          },
-          plugins: {
             legend: {
               display: false,
             },
-            title: {
-              display: false,
+            layout: {
+              padding: {
+                top: 15,
+                right: 15,
+                bottom: 15,
+                left: 15,
+              },
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                grid: {
+                  display: false,
+                  drawTicks: false,
+                  drawBorder: false,
+                },
+                ticks: {
+                  padding: 35,
+                  max: 1200,
+                  min: 0,
+                },
+              },
+              x: {
+                grid: {
+                  display: false,
+                  drawBorder: false,
+                  color: "rgba(143, 146, 161, .1)",
+                  drawTicks: false,
+                  zeroLineColor: "rgba(143, 146, 161, .1)",
+                },
+                ticks: {
+                  padding: 20,
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+              title: {
+                display: false,
+              },
             },
           },
-        },
-      });
-      // =========== chart two end
+        });
+        // =========== chart two end   
+
+        // Set the default value of the yearSelect dropdown to "2023"
+        document.getElementById('yearSelect').value = "2023";
+
+        // Trigger the change event to update the chart based on the default value
+        updateChart("2023");
+
+        // Add an event listener to the yearSelect dropdown
+        document.getElementById('yearSelect').addEventListener('change', function () {
+            var selectedYear = this.value;
+
+            // Update the chart based on the selected year
+            updateChart(selectedYear);
+        });
+
+        // Function to update the chart based on the selected year
+        function updateChart(selectedYear) {
+            // Filter the chartData based on the selected year
+            var filteredData = chartData.filter(item => item.year == selectedYear);
+
+            // Update the chart labels and values
+            var chartLabels = filteredData.map(item => item.month);
+            var chartValues = filteredData.map(item => item.total_average_price);
+
+            // Convert numerical month values to string representations
+            chartLabels = chartLabels.map(month => monthNames[month - 1]);
+
+            // Update the chart data
+            chart2.data.labels = chartLabels;
+            chart2.data.datasets[0].data = chartValues;
+
+            // Update the chart
+            chart2.update();
+        }
+        });
 
       // =========== chart three start
       const ctx3 = document.getElementById("Chart3").getContext("2d");
