@@ -3,6 +3,16 @@
         width: 1200px;
         margin: 0 auto;
     }
+
+    .chart-container {
+    height: 390px; /* Adjust the height as needed */
+}
+
+/* Optional: Set the width of the chart container if needed */
+.chart-container {
+    width: 800px; /* Adjust the width as needed */
+}
+
 </style>
 
 <!DOCTYPE html>
@@ -50,12 +60,14 @@
           <a
             href="mainMenu.php"
           >
-            <span class="icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M8.74999 18.3333C12.2376 18.3333 15.1364 15.8128 15.7244 12.4941C15.8448 11.8143 15.2737 11.25 14.5833 11.25H9.99999C9.30966 11.25 8.74999 10.6903 8.74999 10V5.41666C8.74999 4.7263 8.18563 4.15512 7.50586 4.27556C4.18711 4.86357 1.66666 7.76243 1.66666 11.25C1.66666 15.162 4.83797 18.3333 8.74999 18.3333Z" /> 
-              </svg>
-            </span>
+              <span class="icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M8.74999 18.3333C12.2376 18.3333 15.1364 15.8128 15.7244 12.4941C15.8448 11.8143 15.2737 11.25 14.5833 11.25H9.99999C9.30966 11.25 8.74999 10.6903 8.74999 10V5.41666C8.74999 4.7263 8.18563 4.15512 7.50586 4.27556C4.18711 4.86357 1.66666 7.76243 1.66666 11.25C1.66666 15.162 4.83797 18.3333 8.74999 18.3333Z" />
+                  <path
+                    d="M17.0833 10C17.7737 10 18.3432 9.43708 18.2408 8.75433C17.7005 5.14918 14.8508 2.29947 11.2457 1.75912C10.5629 1.6568 10 2.2263 10 2.91665V9.16666C10 9.62691 10.3731 10 10.8333 10H17.0833Z" />
+                </svg>
+              </span>
             <span class="text">Issues</span>
           </a>
         </li>
@@ -65,11 +77,13 @@
         <li class="nav-item">
           <a href="inventory.php">
             <span class="icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M3.33334 3.35442C3.33334 2.4223 4.07954 1.66666 5.00001 1.66666H15C15.9205 1.66666 16.6667 2.4223 16.6667 3.35442V16.8565C16.6667 17.5519 15.8827 17.9489 15.3333 17.5317L13.8333 16.3924C13.537 16.1673 13.1297 16.1673 12.8333 16.3924L10.5 18.1646C10.2037 18.3896 9.79634 18.3896 9.50001 18.1646L7.16668 16.3924C6.87038 16.1673 6.46298 16.1673 6.16668 16.3924L4.66668 17.5317C4.11731 17.9489 3.33334 17.5519 3.33334 16.8565V3.35442ZM4.79168 5.04218C4.79168 5.39173 5.0715 5.6751 5.41668 5.6751H10C10.3452 5.6751 10.625 5.39173 10.625 5.04218C10.625 4.69264 10.3452 4.40927 10 4.40927H5.41668C5.0715 4.40927 4.79168 4.69264 4.79168 5.04218ZM5.41668 7.7848C5.0715 7.7848 4.79168 8.06817 4.79168 8.41774C4.79168 8.76724 5.0715 9.05066 5.41668 9.05066H10C10.3452 9.05066 10.625 8.76724 10.625 8.41774C10.625 8.06817 10.3452 7.7848 10 7.7848H5.41668ZM4.79168 11.7932C4.79168 12.1428 5.0715 12.4262 5.41668 12.4262H10C10.3452 12.4262 10.625 12.1428 10.625 11.7932C10.625 11.4437 10.3452 11.1603 10 11.1603H5.41668C5.0715 11.1603 4.79168 11.4437 4.79168 11.7932ZM13.3333 4.40927C12.9882 4.40927 12.7083 4.69264 12.7083 5.04218C12.7083 5.39173 12.9882 5.6751 13.3333 5.6751H14.5833C14.9285 5.6751 15.2083 5.39173 15.2083 5.04218C15.2083 4.69264 14.9285 4.40927 14.5833 4.40927H13.3333ZM12.7083 8.41774C12.7083 8.76724 12.9882 9.05066 13.3333 9.05066H14.5833C14.9285 9.05066 15.2083 8.76724 15.2083 8.41774C15.2083 8.06817 14.9285 7.7848 14.5833 7.7848H13.3333C12.9882 7.7848 12.7083 8.06817 12.7083 8.41774ZM13.3333 11.1603C12.9882 11.1603 12.7083 11.4437 12.7083 11.7932C12.7083 12.1428 12.9882 12.4262 13.3333 12.4262H14.5833C14.9285 12.4262 15.2083 12.1428 15.2083 11.7932C15.2083 11.4437 14.9285 11.1603 14.5833 11.1603H13.3333Z" />
-              </svg>
-            </span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M11.8097 1.66667C11.8315 1.66667 11.8533 1.6671 11.875 1.66796V4.16667C11.875 5.43232 12.901 6.45834 14.1667 6.45834H16.6654C16.6663 6.48007 16.6667 6.50186 16.6667 6.5237V16.6667C16.6667 17.5872 15.9205 18.3333 15 18.3333H5.00001C4.07954 18.3333 3.33334 17.5872 3.33334 16.6667V3.33334C3.33334 2.41286 4.07954 1.66667 5.00001 1.66667H11.8097ZM6.66668 7.70834C6.3215 7.70834 6.04168 7.98816 6.04168 8.33334C6.04168 8.67851 6.3215 8.95834 6.66668 8.95834H10C10.3452 8.95834 10.625 8.67851 10.625 8.33334C10.625 7.98816 10.3452 7.70834 10 7.70834H6.66668ZM6.04168 11.6667C6.04168 12.0118 6.3215 12.2917 6.66668 12.2917H13.3333C13.6785 12.2917 13.9583 12.0118 13.9583 11.6667C13.9583 11.3215 13.6785 11.0417 13.3333 11.0417H6.66668C6.3215 11.0417 6.04168 11.3215 6.04168 11.6667ZM6.66668 14.375C6.3215 14.375 6.04168 14.6548 6.04168 15C6.04168 15.3452 6.3215 15.625 6.66668 15.625H13.3333C13.6785 15.625 13.9583 15.3452 13.9583 15C13.9583 14.6548 13.6785 14.375 13.3333 14.375H6.66668Z" />
+                  <path
+                    d="M13.125 2.29167L16.0417 5.20834H14.1667C13.5913 5.20834 13.125 4.74197 13.125 4.16667V2.29167Z" />
+                </svg>
+              </span>
             <span class="text">Inventory</span>
           </a>
         </li>
@@ -92,11 +106,12 @@
         <!-- Activity Starts -->
         <li class="nav-item">
           <a href="toDo.php">
-            <span class="icon">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M3.33334 3.35442C3.33334 2.4223 4.07954 1.66666 5.00001 1.66666H15C15.9205 1.66666 16.6667 2.4223 16.6667 3.35442V16.8565C16.6667 17.5519 15.8827 17.9489 15.3333 17.5317L13.8333 16.3924C13.537 16.1673 13.1297 16.1673 12.8333 16.3924L10.5 18.1646C10.2037 18.3896 9.79634 18.3896 9.50001 18.1646L7.16668 16.3924C6.87038 16.1673 6.46298 16.1673 6.16668 16.3924L4.66668 17.5317C4.11731 17.9489 3.33334 17.5519 3.33334 16.8565V3.35442ZM4.79168 5.04218C4.79168 5.39173 5.0715 5.6751 5.41668 5.6751H10C10.3452 5.6751 10.625 5.39173 10.625 5.04218C10.625 4.69264 10.3452 4.40927 10 4.40927H5.41668C5.0715 4.40927 4.79168 4.69264 4.79168 5.04218ZM5.41668 7.7848C5.0715 7.7848 4.79168 8.06817 4.79168 8.41774C4.79168 8.76724 5.0715 9.05066 5.41668 9.05066H10C10.3452 9.05066 10.625 8.76724 10.625 8.41774C10.625 8.06817 10.3452 7.7848 10 7.7848H5.41668ZM4.79168 11.7932C4.79168 12.1428 5.0715 12.4262 5.41668 12.4262H10C10.3452 12.4262 10.625 12.1428 10.625 11.7932C10.625 11.4437 10.3452 11.1603 10 11.1603H5.41668C5.0715 11.1603 4.79168 11.4437 4.79168 11.7932ZM13.3333 4.40927C12.9882 4.40927 12.7083 4.69264 12.7083 5.04218C12.7083 5.39173 12.9882 5.6751 13.3333 5.6751H14.5833C14.9285 5.6751 15.2083 5.39173 15.2083 5.04218C15.2083 4.69264 14.9285 4.40927 14.5833 4.40927H13.3333ZM12.7083 8.41774C12.7083 8.76724 12.9882 9.05066 13.3333 9.05066H14.5833C14.9285 9.05066 15.2083 8.76724 15.2083 8.41774C15.2083 8.06817 14.9285 7.7848 14.5833 7.7848H13.3333C12.9882 7.7848 12.7083 8.06817 12.7083 8.41774ZM13.3333 11.1603C12.9882 11.1603 12.7083 11.4437 12.7083 11.7932C12.7083 12.1428 12.9882 12.4262 13.3333 12.4262H14.5833C14.9285 12.4262 15.2083 12.1428 15.2083 11.7932C15.2083 11.4437 14.9285 11.1603 14.5833 11.1603H13.3333Z" />
-              </svg>
+              <span class="icon">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M4.16666 3.33335C4.16666 2.41288 4.91285 1.66669 5.83332 1.66669H14.1667C15.0872 1.66669 15.8333 2.41288 15.8333 3.33335V16.6667C15.8333 17.5872 15.0872 18.3334 14.1667 18.3334H5.83332C4.91285 18.3334 4.16666 17.5872 4.16666 16.6667V3.33335ZM6.04166 5.00002C6.04166 5.3452 6.32148 5.62502 6.66666 5.62502H13.3333C13.6785 5.62502 13.9583 5.3452 13.9583 5.00002C13.9583 4.65485 13.6785 4.37502 13.3333 4.37502H6.66666C6.32148 4.37502 6.04166 4.65485 6.04166 5.00002ZM6.66666 6.87502C6.32148 6.87502 6.04166 7.15485 6.04166 7.50002C6.04166 7.8452 6.32148 8.12502 6.66666 8.12502H13.3333C13.6785 8.12502 13.9583 7.8452 13.9583 7.50002C13.9583 7.15485 13.6785 6.87502 13.3333 6.87502H6.66666ZM6.04166 10C6.04166 10.3452 6.32148 10.625 6.66666 10.625H9.99999C10.3452 10.625 10.625 10.3452 10.625 10C10.625 9.65485 10.3452 9.37502 9.99999 9.37502H6.66666C6.32148 9.37502 6.04166 9.65485 6.04166 10ZM9.99999 16.6667C10.9205 16.6667 11.6667 15.9205 11.6667 15C11.6667 14.0795 10.9205 13.3334 9.99999 13.3334C9.07949 13.3334 8.33332 14.0795 8.33332 15C8.33332 15.9205 9.07949 16.6667 9.99999 16.6667Z" />
+                    </svg>
+              </span>
             </span>
             <span class="text">Activity</span>
           </a>
@@ -172,7 +187,7 @@
             <div class="row align-items-center">
               <div class="col-md-6">
                 <div class="title">
-                  <h2>Problem Category</h2>
+                  <h2>Issues</h2>
                 </div>
               </div>
               <!-- end col -->
@@ -184,7 +199,7 @@
                         <a href="#0">Dashboard</a>
                       </li>
                       <li class="breadcrumb-item active" aria-current="page">
-                      Problem Category
+                      Issues
                       </li>
                     </ol>
                   </nav>
@@ -196,123 +211,70 @@
           </div>
           <!-- ========== title-wrapper end ========== -->
 
+          <!-- ========== pie chart starts ========== -->
           <?php
-          // Include database connection
           include 'connect.php';
 
-          // Query to get counts for each material class
-          $query = "SELECT defect_type, COUNT(*) as count FROM defects GROUP BY defect_type";
-
-          // Perform the query
+          $query = "SELECT status, COUNT(*) as count FROM defects GROUP BY status";
           $result = $mysqli->query($query);
 
-          // Check if the query was successful
-          if ($result) {
-              // Initialize an array to store the counts
-              $counts = [
-                  'PILOT' => 0,
-                  'MAINTENANCE' => 0,
-                  'CABIN' => 0
-              ];
-
-              // Fetch each row from the result set
-              while ($row = $result->fetch_assoc()) {
-                  // Assign the count to the respective material class
-                  $counts[$row['defect_type']] = $row['count'];
-              }
-
-              // Close the result set
-              $result->close();
-          } else {
-              // Handle the query error
-              echo "Error: " . $query . "<br>" . $mysqli->error;
+          $data = [];
+          while ($row = mysqli_fetch_assoc($result)) {
+              $data[$row['status']] = $row['count'];
           }
 
-          // Close the database connection
-          $mysqli->close();
-          ?>
+          // Prepare data for Chart.js
+          $chartCategoriesPie = ['OPEN', 'CLOSED'];
+          $chartCountsPie = [];
 
+          foreach ($chartCategoriesPie as $categoryPie) {
+              $chartCountsPie[] = isset($data[$categoryPie]) ? $data[$categoryPie] : 0;
+          }
+          ?>
           <!-- ========== form-elements-wrapper start ========== -->
           <div class="form-elements-wrapper">
-            <div class="row">
-              <div class="col-lg-4">
-                <!-- input style start -->
-                <div class="icon-card mb-30">
-                        <!-- <div class="icon purple">
-                          <!-- <i class="lni lni-cart-full"></i> -->
-                        <!-- </div> -->
-                        <div class="content">
-                            <h6 class="mb-10">PILOT</h6>
-                            <h3 class="text-bold mb-10"><?php echo $counts['PILOT']; ?></h3>
-                        </div>
-                  <!-- end input -->
-                </div>
-                <!-- end card -->
-                <!-- ======= input style end ======= -->
+              <div class="row">
+                  <div class="col-lg-6">
+                      <!-- input style start -->
+                      <div class="card-style mb-30">
+                          <h6 class="mb-25">Status</h6>
+                          <div class="chart-container">
+                          <canvas id="myChartPie"></canvas>
+                          </div>
+                      </div>
+                  </div>
 
-                <!-- ======= select style start ======= -->
-                <div class="icon-card mb-30">
-                        <!-- <div class="icon success">
-                           <i class="lni lni-dollar"></i> -->
-                        <!-- </div> -->
-                        <div class="content">
-                            <h6 class="mb-10">MAINTENANCE</h6>
-                            <h3 class="text-bold mb-10"><?php echo $counts['MAINTENANCE']; ?></h3>
-                        </div>
-                  <!-- end select -->
-                </div>
-                <!-- end card -->
-                <!-- ======= select style end ======= -->
+                  <!-- ========== bar chart starts ========== -->
+                  <?php
+                  $query = "SELECT defect_type, COUNT(*) as count FROM defects GROUP BY defect_type";
+                  $result = $mysqli->query($query);
 
-                <!-- ======= select style start ======= -->
-                <div class="card-style mb-30">
-                        <!-- <div class="icon primary">
-                            <i class="lni lni-credit-cards"></i>
-                        </div> -->
-                        <div class="content">
-                            <h6 class="mb-10">CABIN</h6>
-                            <h3 class="text-bold mb-10"><?php echo $counts['CABIN']; ?></h3>
-                        </div>
-                  <!-- end input -->
-                </div>
-                <!-- end card -->
-              <!-- ======= div class="form-elements-wrapper ======= -->
+                  $data = [];
+                  while ($row = mysqli_fetch_assoc($result)) {
+                      $data[$row['defect_type']] = $row['count'];
+                  }
+
+                  // Prepare data for Chart.js
+                  $defectCategories = ['PILOT', 'MAINTENANCE', 'CABIN'];
+                  $defectCounts = [];
+
+                  foreach ($defectCategories as $category) {
+                      $defectCounts[] = isset($data[$category]) ? $data[$category] : 0;
+                  }
+                  ?>
+
+                  <div class="col-lg-6">
+                      <div class="card-style mb-30">
+                          <h6 class="mb-25">Defect Type</h6>
+                          <canvas id="myChart" width="800" height="600"></canvas>
+                      </div>
+                      <!-- end col -->
+                  </div>
+                  <!-- end row -->
               </div>
-
-              <!-- bar chart shape -->
-              <div class="col-lg-8">
-
-            <!-- ========== bar chart starts ========== -->
-            <?php
-            include 'connect.php';
-
-            $query = "SELECT defect_type, COUNT(*) as count FROM defects GROUP BY defect_type";
-            $result = $mysqli->query($query);
-
-            $data = [];
-            while ($row = mysqli_fetch_assoc($result)) {
-                $data[$row['defect_type']] = $row['count'];
-            }
-
-            // Prepare data for Chart.js
-            $defectCategories = ['PILOT', 'MAINTENANCE', 'CABIN'];
-            $defectCounts = [];
-
-            foreach ($defectCategories as $category) {
-                $defectCounts[] = $counts[$category];
-            }
-            ?>
-                <div class="card-style mb-30">
-                  <h6 class="mb-25">Bar Chart</h6>
-                  <canvas id="myChart" width="800" height="400"></canvas>
-                </div>
-              <!-- end col -->
-            </div>
-            <!-- end row -->
+              <!-- ========== form-elements-wrapper end ========== -->
           </div>
-          <!-- ========== form-elements-wrapper end ========== -->
-        </div>
-        <!-- end container -->
+          <!-- end container -->
 
             <!-- ========== tables-wrapper start ========== -->
           <div class="tables-wrapper">
@@ -484,8 +446,6 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <!-- DataTables JS -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-
-
     <script>
 
     // ==== Filter status === //    
@@ -514,36 +474,54 @@
               }
           }
 
-      // ==== BAR CHART === //
-      var ctx = document.getElementById('myChart').getContext('2d');
-              var myChart = new Chart(ctx, {
-                  type: 'bar',
-                  data: {
-                      labels: <?php echo json_encode($defectCategories); ?>,
-                      datasets: [{
-                          label: 'Total',
-                          data: <?php echo json_encode($defectCounts); ?>,
-                          backgroundColor: [
-                              'rgba(255, 99, 132, 0.2)',
-                              'rgba(54, 162, 235, 0.2)',
-                              'rgba(255, 206, 86, 0.2)',
-                          ],
-                          borderColor: [
-                              'rgba(255, 99, 132, 1)',
-                              'rgba(54, 162, 235, 1)',
-                              'rgba(255, 206, 86, 1)',
-                          ],
-                          borderWidth: 1,
-                      }],
-                  },
-                  options: {
-                      scales: {
-                          y: {
-                              beginAtZero: true,
-                          },
-                      },
-                  },
-              });
+    // ==== PIE CHART === //
+    var ctxPie = document.getElementById('myChartPie').getContext('2d');
+    var myChartPie = new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: <?php echo json_encode($chartCategoriesPie); ?>,
+            datasets: [{
+                label: 'Status',
+                data: <?php echo json_encode($chartCountsPie); ?>,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(153, 255, 134)',
+                ],
+                hoverOffset: 4
+            }],
+        },
+    });
+
+    // ==== BAR CHART === //
+    var ctxBar = document.getElementById('myChart').getContext('2d');
+    var myChartBar = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: <?php echo json_encode($defectCategories); ?>,
+            datasets: [{
+                label: 'Quantity',
+                data: <?php echo json_encode($defectCounts); ?>,
+                backgroundColor: [
+                    'rgba(153, 0, 153, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                ],
+                borderColor: [
+                    'rgba(153, 0, 153, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                ],
+                borderWidth: 1,
+            }],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
 
       //scroll data table
       new DataTable('#defectTable', {

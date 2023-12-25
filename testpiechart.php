@@ -409,57 +409,61 @@
               $chartCountsPie[] = isset($data[$categoryPie]) ? $data[$categoryPie] : 0;
           }
           ?>
-          <div class="card-style mb-10">
-              <h6 class="mb-25">Pie Chart</h6>
-              <canvas id="myChartPie" width="400" height="300"></canvas>
+          <!-- ========== form-elements-wrapper start ========== -->
+          <div class="form-elements-wrapper">
+              <div class="row">
+                  <div class="col-lg-6">
+                      <!-- input style start -->
+                      <div class="card-style mb-30">
+                          <h6 class="mb-25">Pie Chart</h6>
+                          <canvas id="myChartPie" width="800" height="200"></canvas>
+                      </div>
+                  </div>
+
+                  <!-- ========== bar chart starts ========== -->
+                  <?php
+                  $query = "SELECT defect_type, COUNT(*) as count FROM defects GROUP BY defect_type";
+                  $result = $mysqli->query($query);
+
+                  $data = [];
+                  while ($row = mysqli_fetch_assoc($result)) {
+                      $data[$row['defect_type']] = $row['count'];
+                  }
+
+                  // Prepare data for Chart.js
+                  $defectCategories = ['PILOT', 'MAINTENANCE', 'CABIN'];
+                  $defectCounts = [];
+
+                  foreach ($defectCategories as $category) {
+                      $defectCounts[] = isset($data[$category]) ? $data[$category] : 0;
+                  }
+                  ?>
+
+                  <div class="col-lg-6">
+                      <div class="card-style mb-30">
+                          <h6 class="mb-25">Bar Chart</h6>
+                          <canvas id="myChart" width="800" height="800"></canvas>
+                      </div>
+                      <!-- end col -->
+                  </div>
+                  <!-- end row -->
+              </div>
+              <!-- ========== form-elements-wrapper end ========== -->
           </div>
+          <!-- end container -->
+</main>
+<!-- ======== main-wrapper end =========== -->
 
-          <!-- ========== bar chart starts ========== -->
-          <?php
-          include 'connect.php';
-
-          $query = "SELECT material_class, COUNT(*) as count FROM parts GROUP BY material_class";
-          $result = $mysqli->query($query);
-
-          $data = [];
-          while ($row = mysqli_fetch_assoc($result)) {
-              $data[$row['material_class']] = $row['count'];
-          }
-
-          // Prepare data for Chart.js
-          $chartCategories = ['ROTABLE', 'EXPANDABLE', 'CONSUMABLE'];
-          $chartCounts = [];
-
-          foreach ($chartCategories as $category) {
-              $chartCounts[] = isset($data[$category]) ? $data[$category] : 0;
-          }
-          ?>
-          <div class="card-style mb-30">
-              <h6 class="mb-25">Bar Chart</h6>
-              <canvas id="myChart" width="800" height="400"></canvas>
-          </div>
-              <!-- end col -->
-            </div>
-            <!-- end row -->
-          </div>
-          <!-- ========== form-elements-wrapper end ========== -->
-        </div>
-        <!-- end container -->
-
-
-    </main>
-    <!-- ======== main-wrapper end =========== -->
-
-    <!-- ========= All Javascript files linkup ======== -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/dynamic-pie-chart.js"></script>
-    <script src="assets/js/moment.min.js"></script>
-    <script src="assets/js/fullcalendar.js"></script>
-    <script src="assets/js/jvectormap.min.js"></script>
-    <script src="assets/js/world-merc.js"></script>
-    <script src="assets/js/polyfill.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/Chart.min.js"></script>
+<!-- ========= All Javascript files linkup ======== -->
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/dynamic-pie-chart.js"></script>
+<script src="assets/js/moment.min.js"></script>
+<script src="assets/js/fullcalendar.js"></script>
+<script src="assets/js/jvectormap.min.js"></script>
+<script src="assets/js/world-merc.js"></script>
+<script src="assets/js/polyfill.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/Chart.min.js"></script>
 <script>
     // ==== PIE CHART === //
     var ctxPie = document.getElementById('myChartPie').getContext('2d');
@@ -472,7 +476,7 @@
                 data: <?php echo json_encode($chartCountsPie); ?>,
                 backgroundColor: [
                     'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
+                    'rgb(153, 255, 134)',
                 ],
                 hoverOffset: 4
             }],
@@ -484,17 +488,17 @@
     var myChartBar = new Chart(ctxBar, {
         type: 'bar',
         data: {
-            labels: <?php echo json_encode($chartCategories); ?>,
+            labels: <?php echo json_encode($defectCategories); ?>,
             datasets: [{
-                label: 'Material Class Counts',
-                data: <?php echo json_encode($chartCounts); ?>,
+                label: 'Quantity',
+                data: <?php echo json_encode($defectCounts); ?>,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(153, 0, 153, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
+                    'rgba(153, 0, 153, 1)',
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
                 ],
@@ -509,6 +513,7 @@
             },
         },
     });
-            </script>
+</script>
+
   </body>
 </html>

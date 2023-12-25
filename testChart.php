@@ -496,6 +496,7 @@
                 $chartCounts[] = $counts[$category];
             }
             ?>
+            
                 <div class="card-style mb-30">
                   <h6 class="mb-25">Bar Chart</h6>
                   <canvas id="myChart" width="800" height="400"></canvas>
