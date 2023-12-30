@@ -121,26 +121,30 @@
       <header class="header">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-5 col-md-5 col-6">
+            <div class="col-lg-7 col-md-7 col-6">
               <div class="header-left d-flex align-items-center">
                 <div class="menu-toggle-btn mr-15">
                   <button id="menu-toggle" class="main-btn primary-btn btn-hover">
                     <i class="lni lni-chevron-left me-2"></i> Menu
                   </button>
                 </div>
-              </div>
+                <div class="header-search d-none d-md-flex flex-grow-1 d-flex justify-content-end">
+                    <div class="logo-container text-center">
+                        <img class="logo-primary-img" src="https://www.malaysiaairlines.com/content/dam/mh/my/en/header-footer/mh-logo-light-theme-142x35px.png" alt="mh-logo-dark-theme" data-v-8c703a7d="">
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-7 col-md-7 col-6">
-              <div class="header-right">
-
-               <!-- profile start -->
-               <div class="profile-box ml-15">
+          </div>
+            <div class="col-lg-5 col-md-5 col-6">
+              <div class="header-right">        
+                <!-- profile start -->
+                <div class="profile-box ml-15">
                   <button class="dropdown-toggle bg-transparent border-0" type="button" id="profile"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="profile-info">
                       <div class="info">
                         <div>
-                          <h6 class="fw-500">Nurul Filzah</h6>
+                          <h6 class="fw-500">User</h6>
                         </div>
                       </div>
                     </div>
@@ -149,7 +153,7 @@
                     <li>
                       <div class="author-info flex items-center !p-1">
                         <div class="content">
-                          <h4 class="text-sm">Nurul Filzah</h4>
+                          <h4 class="text-sm">User</h4>
                         </div>
                       </div>
                     </li>
@@ -268,62 +272,6 @@
                             <textarea name="defect_description" placeholder="PLEASE DESCRIBE THE DEFECTS HERE..." rows="5" required></textarea>
                             <small class="form-text text-danger">* This field is required.</small>
                         </div>
-
-                        <!-- Add a horizontal line to separate sections -->
-                        <!-- <hr class="section-divider">
-                        <h6 class="mb-25">Please update the details accordingly.</h6>
-
-                        <div class="col-md-4">
-                            <div class="input-style-1">
-                            <label>ACTION ID</label>
-                            <input type="text" name="action_id" placeholder="ACTION ID" />
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-style-1">
-                              <label>ACTION DATE</label>
-                              <input type="date" name="action_date"/>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-style-2">
-                            <label>ACTION TIME</label>
-                              <input type="time" name="action_time"/>
-                            </div>
-                        </div>
-                        <div class="input-style-2">
-                            <label>ACTION DESCRIPTION</label>
-                            <textarea name="action_description" placeholder="PLEASE DESCRIBE THE ACTION THAT HAVE BEEN TAKE..." rows="5"></textarea>
-                        </div> -->
-
-                        <!-- Add a horizontal line to separate sections -->
-                        <!-- <hr class="section-divider">
-                        <h6 class="mb-25">Please update the details accordingly.</h6>
-
-                        <div class="col-md-4">
-                        <div class="select-style-1">
-                            <label>STATUS</label>
-                            <div class="select-position"> 
-                            <select name="status">
-                                    <option value="">SELECT CATEGORY</option>
-                                    <option value="OPEN">OPEN</option>
-                                    <option value="CLOSED">CLOSED</option>
-                                </select>
-                            </div>
-                        </div>
-                        </div> -->
-                        <!-- <div class="col-md-4">
-                            <div class="input-style-1">
-                              <label>CLOSED DATE</label>
-                              <input type="date" name="closed_date"/>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="input-style-2">
-                            <label>CLOSED TIME</label>
-                              <input type="time" name="closed_time"/>
-                            </div>
-                        </div> -->
                         <div class="button-container row">
                             <div class="col-md-6">
                                 <button type="submit" class="main-btn primary-btn rounded-full btn-hover">Submit</button> 

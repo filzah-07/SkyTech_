@@ -110,17 +110,22 @@
       <header class="header">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-5 col-md-5 col-6">
+            <div class="col-lg-7 col-md-7 col-6">
               <div class="header-left d-flex align-items-center">
                 <div class="menu-toggle-btn mr-15">
                   <button id="menu-toggle" class="main-btn primary-btn btn-hover">
                     <i class="lni lni-chevron-left me-2"></i> Menu
                   </button>
                 </div>
-              </div>
+                <div class="header-search d-none d-md-flex flex-grow-1 d-flex justify-content-end">
+                    <div class="logo-container text-center">
+                        <img class="logo-primary-img" src="https://www.malaysiaairlines.com/content/dam/mh/my/en/header-footer/mh-logo-light-theme-142x35px.png" alt="mh-logo-dark-theme" data-v-8c703a7d="">
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-7 col-md-7 col-6">
-              <div class="header-right">
+          </div>
+            <div class="col-lg-5 col-md-5 col-6">
+              <div class="header-right">        
                 <!-- profile start -->
                 <div class="profile-box ml-15">
                   <button class="dropdown-toggle bg-transparent border-0" type="button" id="profile"
@@ -128,7 +133,7 @@
                     <div class="profile-info">
                       <div class="info">
                         <div>
-                          <h6 class="fw-500">Nurul Filzah</h6>
+                          <h6 class="fw-500">User</h6>
                         </div>
                       </div>
                     </div>

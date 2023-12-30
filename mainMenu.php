@@ -138,16 +138,21 @@
       <header class="header">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-5 col-md-5 col-6">
+            <div class="col-lg-7 col-md-7 col-6">
               <div class="header-left d-flex align-items-center">
                 <div class="menu-toggle-btn mr-15">
                   <button id="menu-toggle" class="main-btn primary-btn btn-hover">
                     <i class="lni lni-chevron-left me-2"></i> Menu
                   </button>
                 </div>
-              </div>
+                <div class="header-search d-none d-md-flex flex-grow-1 d-flex justify-content-end">
+                    <div class="logo-container text-center">
+                        <img class="logo-primary-img" src="https://www.malaysiaairlines.com/content/dam/mh/my/en/header-footer/mh-logo-light-theme-142x35px.png" alt="mh-logo-dark-theme" data-v-8c703a7d="">
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-7 col-md-7 col-6">
+          </div>
+            <div class="col-lg-5 col-md-5 col-6">
               <div class="header-right">        
                 <!-- profile start -->
                 <div class="profile-box ml-15">
@@ -156,7 +161,7 @@
                     <div class="profile-info">
                       <div class="info">
                         <div>
-                          <h6 class="fw-500">Nurul Filzah</h6>
+                          <h6 class="fw-500">User</h6>
                         </div>
                       </div>
                     </div>
@@ -165,7 +170,7 @@
                     <li>
                       <div class="author-info flex items-center !p-1">
                         <div class="content">
-                          <h4 class="text-sm">Nurul Filzah</h4>
+                          <h4 class="text-sm">User</h4>
                         </div>
                       </div>
                     </li>
@@ -345,9 +350,9 @@
                     <div class="select-style-1">
                       <div class="select-position select-sm">
                         <select id="statusFilter" class="light-bg">
-                          <option value="">Status</option>
-                          <option value="CLOSED">Closed</option>
-                          <option value="OPEN">Open</option>
+                          <option value="">STATUS</option>
+                          <option value="CLOSED">CLOSED</option>
+                          <option value="OPEN">OPEN</option>
                         </select>
                       </div>
                     </div>
@@ -540,7 +545,7 @@
     // ==== DOUGHNUT CHART === //
     var ctxDoughnut = document.getElementById('myChartDoughnut').getContext('2d');
     var myChartDoughnut = new Chart(ctxDoughnut, {
-        type: 'doughnut',
+        type: 'pie',
         data: {
             labels: <?php echo json_encode($chartCategoriesDoughnut); ?>,
             datasets: [{
@@ -558,21 +563,21 @@
     // ==== PIE CHART === //
     var ctxPie = document.getElementById('myChartPie').getContext('2d');
     var myChartPie = new Chart(ctxPie, {
-        type: 'pie',
+        type: 'doughnut',
         data: {
             labels: <?php echo json_encode($defectCategoriesPie); ?>,
             datasets: [{
                 label: 'Quantity',
                 data: <?php echo json_encode($defectCountsPie); ?>,
                 backgroundColor: [
-                    'rgba(216, 116, 3, 0.84)',
-                    'rgba(149, 82, 5, 0.84)',
-                    'rgba(217, 170, 76, 0.84)',
+                    'rgba(174, 0, 172, 0.8)',
+                    'rgba(213, 14, 173, 0.8)',
+                    'rgba(175, 59, 254, 0.8)',
                 ],
                 borderColor: [
-                    'rgba(216, 116, 3, 1)',
-                    'rgba(149, 82, 5, 1)',
-                    'rgba(217, 170, 76, 1)',
+                    'rgba(174, 0, 172, 1)',
+                    'rgba(213, 14, 173, 1)',
+                    'rgba(175, 59, 254, 1)',
                 ],
                 borderWidth: 1,
             }],

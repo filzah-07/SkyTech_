@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,10 +111,9 @@
 
                 <!-- Form Structure -->
                 <div class="container">
-                <div class="row justify-content-center mt-5">
+                <div class="row justify-content-center">
                 <div class="col-lg-12">
-
-                <h2 class="text-center mb-4">Update Issue/Defect Form</h2>
+                <h2 class="text-center mb-4 custom-margin-top">Update Issue/Defect Form</h2>
                 <form action="" method="post">
 
                     <div class="card mb-4">
