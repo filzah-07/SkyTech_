@@ -451,6 +451,43 @@
               <!-- ========== form-elements-wrapper end ========== -->
           </div>
           <!-- end container -->
+
+          <!-- ========== bar chart starts ========== -->
+          <?php
+          $query = "SELECT aircraft_id, COUNT(*) as count FROM defects GROUP BY aircraft_id";
+          $result = $mysqli->query($query);
+
+          $data = array();
+
+          if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                  $data[] = array(
+                      'aircraft_id' => $row['aircraft_id'],
+                      'count' => $row['count']
+                  );
+              }
+          }
+
+          $mysqli->close();
+
+          $chartData = json_encode($data);
+          ?>
+
+          <!-- ========== BAR CHART ========== -->
+          <div class="form-elements-wrapper">
+            <div class="row">
+              <div class="col-lg-12">
+                <!-- Chart container -->
+                <div class="card-style mb-30">
+                  <h6 class="mb-25">Aircraft Effected</h6>
+                  <div class="chart-container">
+                    <canvas id="aircraftChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
 </main>
 <!-- ======== main-wrapper end =========== -->
 
@@ -513,6 +550,55 @@
             },
         },
     });
+
+
+// ==== BAR CHART === //
+    const chartData = <?php echo json_encode($data); ?>;
+
+const labels = chartData.map(entry => entry.aircraft_id);
+const frequencies = chartData.map(entry => entry.count); // Fix this line
+
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'Frequency',
+    data: frequencies,
+    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+    borderColor: 'rgb(75, 192, 192)',
+    borderWidth: 1
+  }]
+};
+
+// ==== BAR CHART === //
+const canvas = document.getElementById('aircraftChart');
+const ctx = canvas.getContext('2d');
+
+// Create the bar chart
+const aircraftChart = new Chart(ctx, {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      x: {
+        type: 'category',
+        labels: labels,
+        title: {
+          display: true,
+          text: 'Aircraft ID'
+        }
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Frequency'
+        }
+      }
+    }
+  }
+});
+
+
 </script>
 
   </body>

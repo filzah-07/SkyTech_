@@ -5,13 +5,13 @@ if (isset($_POST['status'])) {
     $status = $_POST['status'];
 
     // Use prepared statements to prevent SQL injection
-    if (empty($status)) {
-        // If no specific status is selected, retrieve all rows
-        $query = "SELECT defect_id, defect_description, defect_type, issueDateTime, action_id, action_description, action_start_time, status, closedDateTime FROM defects";
+    if (empty($status) || $status === 'all') {
+        // If no specific status is selected or 'all' is selected, retrieve all rows
+        $query = "SELECT defect_id, defect_description, aircraft_id, defect_type, issueDateTime, status FROM defects";
         $stmt = $mysqli->prepare($query);
     } else {
         // If a specific status is selected, filter by that status
-        $query = "SELECT defect_id, defect_description, defect_type, issueDateTime, action_id, action_description, action_start_time, status, closedDateTime FROM defects WHERE status = ?";
+        $query = "SELECT defect_id, defect_description, aircraft_id, defect_type, issueDateTime FROM defects WHERE status = ?";
         $stmt = $mysqli->prepare($query);
         $stmt->bind_param("s", $status);
     }
@@ -23,7 +23,7 @@ if (isset($_POST['status'])) {
     if ($result->num_rows > 0) {
         // Output data of each row
         while ($row = $result->fetch_assoc()) {
-            // Output your table row as before
+            // Output table row as before
             echo "<tr>";
             echo '<td class="min-width">';
             echo '<div class="lead">';
@@ -36,25 +36,25 @@ if (isset($_POST['status'])) {
             echo '<p>' . $row['defect_description'] . '</p>';
             echo '</td>';
             echo '<td class="min-width">';
+            echo '&nbsp;';
+            echo '</td>';
+            echo '<td class="min-width">';
+            echo '<p>' . $row['aircraft_id'] . '</p>';
+            echo '</td>';
+            echo '<td class="min-width">';
+            echo '&nbsp;';
+            echo '</td>';
+            echo '<td class="min-width">';
             echo '<p>' . $row['defect_type'] . '</p>';
             echo '</td>';
             echo '<td class="min-width">';
             echo '<p>' . $row['issueDateTime'] . '</p>';
             echo '</td>';
             echo '<td class="min-width">';
-            echo '<p>' . $row['action_id'] . '</p>';
-            echo '</td>';
-            echo '<td class="min-width">';
-            echo '<p>' . $row['action_description'] . '</p>';
+            echo '&nbsp;';
             echo '</td>';
             echo '<td class="min-width">';
             echo '<p>' . $row['status'] . '</p>';
-            echo '</td>';
-            echo '<td class="min-width">';
-            echo '<p>' . $row['action_start_time'] . '</p>';
-            echo '</td>';
-            echo '<td class="min-width">';
-            echo '<p>' . $row['closedDateTime'] . '</p>';
             echo '</td>';
             echo '<td>';
             echo '<button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown" aria-expanded="false">';
@@ -70,10 +70,9 @@ if (isset($_POST['status'])) {
             echo '</ul>';
             echo '</td>';
             echo '</tr>';
-            echo '</tr>';
         }
     } else {
-        echo "<tr><td colspan='10'>No data available</td></tr>";
+        echo "<tr><td colspan='9'>No data available</td></tr>";
     }
 
     $stmt->close();

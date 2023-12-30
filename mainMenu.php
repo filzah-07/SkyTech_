@@ -4,13 +4,19 @@
         margin: 0 auto;
     }
 
-    .chart-container {
-    height: 390px; /* Adjust the height as needed */
+  .chart-container {
+  position: relative;
+  width: 70%;
+  height: 0;
+  padding-bottom: 75%;
+  margin: 0 auto; /* Center the container horizontally */
 }
 
-/* Optional: Set the width of the chart container if needed */
-.chart-container {
-    width: 800px; /* Adjust the width as needed */
+.chart-container-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px; /* Set the desired height */
 }
 
 </style>
@@ -211,7 +217,7 @@
           </div>
           <!-- ========== title-wrapper end ========== -->
 
-          <!-- ========== pie chart starts ========== -->
+          <!-- ========== doughnut chart starts ========== -->
           <?php
           include 'connect.php';
 
@@ -224,13 +230,18 @@
           }
 
           // Prepare data for Chart.js
-          $chartCategoriesPie = ['OPEN', 'CLOSED'];
-          $chartCountsPie = [];
+          $chartCategoriesDoughnut = ['OPEN', 'CLOSED'];
+          $chartCountsDoughnut = [];
 
-          foreach ($chartCategoriesPie as $categoryPie) {
-              $chartCountsPie[] = isset($data[$categoryPie]) ? $data[$categoryPie] : 0;
+          foreach ($chartCategoriesDoughnut as $categoryDoughnut) {
+              $chartCountsDoughnut[] = isset($data[$categoryDoughnut]) ? $data[$categoryDoughnut] : 0;
           }
           ?>
+
+          <!-- ========== bar chart starts ========== -->
+
+          
+
           <!-- ========== form-elements-wrapper start ========== -->
           <div class="form-elements-wrapper">
               <div class="row">
@@ -239,12 +250,12 @@
                       <div class="card-style mb-30">
                           <h6 class="mb-25">Status</h6>
                           <div class="chart-container">
-                          <canvas id="myChartPie"></canvas>
+                          <canvas id="myChartDoughnut"></canvas>
                           </div>
                       </div>
                   </div>
 
-                  <!-- ========== bar chart starts ========== -->
+                  <!-- ========== pie chart starts ========== -->
                   <?php
                   $query = "SELECT defect_type, COUNT(*) as count FROM defects GROUP BY defect_type";
                   $result = $mysqli->query($query);
@@ -255,18 +266,20 @@
                   }
 
                   // Prepare data for Chart.js
-                  $defectCategories = ['PILOT', 'MAINTENANCE', 'CABIN'];
-                  $defectCounts = [];
+                  $defectCategoriesPie = ['PILOT', 'MAINTENANCE', 'CABIN'];
+                  $defectCountsPie = [];
 
-                  foreach ($defectCategories as $category) {
-                      $defectCounts[] = isset($data[$category]) ? $data[$category] : 0;
+                  foreach ($defectCategoriesPie as $categoryPie) {
+                      $defectCountsPie[] = isset($data[$categoryPie]) ? $data[$categoryPie] : 0;
                   }
                   ?>
 
                   <div class="col-lg-6">
                       <div class="card-style mb-30">
                           <h6 class="mb-25">Defect Type</h6>
-                          <canvas id="myChart" width="800" height="600"></canvas>
+                          <div class="chart-container">
+                          <canvas id="myChartPie"></canvas>
+                          </div>
                       </div>
                       <!-- end col -->
                   </div>
@@ -275,6 +288,46 @@
               <!-- ========== form-elements-wrapper end ========== -->
           </div>
           <!-- end container -->
+
+          <!-- ========== bar chart starts ========== -->
+          <?php
+          $query = "SELECT aircraft_id, COUNT(*) as count FROM defects GROUP BY aircraft_id";
+          $result = $mysqli->query($query);
+
+          $data = array();
+
+          if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                  $data[] = array(
+                      'aircraft_id' => $row['aircraft_id'],
+                      'count' => $row['count']
+                  );
+              }
+          }
+
+          $mysqli->close();
+
+          $chartData = json_encode($data);
+          ?>
+
+          <div class="form-elements-wrapper">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <!-- input style start -->
+                      <div class="card-style mb-30">
+                          <h6 class="mb-25">Aircraft Effected</h6>
+                          <div class="chart-container-1">
+                          <canvas id="aircraftChart"></canvas>
+                          </div>
+                      </div>
+                  <!-- end col -->
+                  </div>
+                  <!-- end row -->
+              </div>
+              <!-- ========== form-elements-wrapper end ========== -->
+          </div>
+          <!-- end container -->
+
 
             <!-- ========== tables-wrapper start ========== -->
           <div class="tables-wrapper">
@@ -291,10 +344,10 @@
                   <div class="right">
                     <div class="select-style-1">
                       <div class="select-position select-sm">
-                        <select class="light-bg" onchange="filterTable(this.value)">
+                        <select id="statusFilter" class="light-bg">
                           <option value="">Status</option>
-                          <option value="Closed">Closed</option>
-                          <option value="Open">Open</option>
+                          <option value="CLOSED">Closed</option>
+                          <option value="OPEN">Open</option>
                         </select>
                       </div>
                     </div>
@@ -310,29 +363,26 @@
                           <th style="width: 10%;">
                             <h6 >DEFECT ID</h6>
                           </th>
-                          <th style="width: 15%;">
+                          <th style="width: 25%;">
                             <h6>DEFECT DESCRIPTION</h6>
                           </th>
-                          <th style="width: 10%;">
-                            <h6>DEFECT TYPE</h6>
-                          </th>
-                          <th style="width: 10%;">
-                            <h6>ISSUE TIME</h6>
-                          </th>
-                          <th style="width: 10%;">
-                            <h6>ACTION ID</h6>
+                          <th style="width: 3%;">
                           </th>
                           <th style="width: 15%;">
-                            <h6>ACTION DESCRIPTION</h6>
+                            <h6>AIRCRAFT EFFECTED</h6>
                           </th>
-                          <th style="width: 10%;">
+                          <th style="width: 3%;">
+                          </th>
+                          <th style="width: 15%;">
+                            <h6>DEFECT TYPE</h6>
+                          </th>
+                          <th style="width: 15%;">
+                            <h6>ISSUE TIME</h6>
+                          </th>
+                          <th style="width: 3%;">
+                          </th>
+                          <th style="width: 13%;">
                             <h6>STATUS</h6>
-                          </th>
-                          <th style="width: 10%;">
-                            <h6>ACTION START TIME</h6>
-                          </th>
-                          <th style="width: 10%;">
-                            <h6>CLOSED TIME</h6>
                           </th>
                           <th>
                             <h6>ACTION</h6>
@@ -348,7 +398,7 @@
                               include 'connect.php';
 
                               // Query to retrieve data from the parts table
-                              $query = "SELECT defect_id, defect_description, defect_type, issueDateTime, action_id, action_description, action_start_time, status, closedDateTime FROM defects";
+                              $query = "SELECT defect_id, defect_description, aircraft_id, defect_type, issueDateTime, status FROM defects";
                               $result = $mysqli->query($query);
 
                               // Check if there are rows in the result
@@ -367,25 +417,25 @@
                                     echo '<p>' . $row['defect_description'] . '</p>';
                                     echo '</td>';
                                     echo '<td class="min-width">';
+                                    echo '&nbsp;';
+                                    echo '</td>';
+                                    echo '<td class="min-width">';
+                                    echo '<p>' . $row['aircraft_id'] . '</p>';
+                                    echo '</td>';
+                                    echo '<td class="min-width">';
+                                    echo '&nbsp;';
+                                    echo '</td>';
+                                    echo '<td class="min-width">';
                                     echo '<p>' . $row['defect_type'] . '</p>';
                                     echo '</td>';
                                     echo '<td class="min-width">';
                                     echo '<p>' . $row['issueDateTime'] . '</p>';
                                     echo '</td>';
                                     echo '<td class="min-width">';
-                                    echo '<p>' . $row['action_id'] . '</p>';
-                                    echo '</td>';
-                                    echo '<td class="min-width">';
-                                    echo '<p>' . $row['action_description'] . '</p>';
+                                    echo '&nbsp;';
                                     echo '</td>';
                                     echo '<td class="min-width">';
                                     echo '<p>' . $row['status'] . '</p>';
-                                    echo '</td>';
-                                    echo '<td class="min-width">';
-                                    echo '<p>' . $row['action_start_time'] . '</p>';
-                                    echo '</td>';
-                                    echo '<td class="min-width">';
-                                    echo '<p>' . $row['closedDateTime'] . '</p>';
                                     echo '</td>';
                                     echo '<td>';
                                     echo '<button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown" aria-expanded="false">';
@@ -449,23 +499,36 @@
     <script>
 
     // ==== Filter status === //    
-    function filterTable(selectedStatus) {
-                $.ajax({
-                    url: 'filter_status.php', 
-                    type: 'POST',
-                    data: { status: selectedStatus },
-                    success: function(response) {
-                        // Update the table body with the filtered data
-                        $('#tableBody').html(response);
-                    },
-                    error: function(error) {
-                        console.error('Error fetching filtered data:', error);
-                    }
-                });
-            }
+    // Get a reference to the select element
+    var statusFilter = document.getElementById('statusFilter');
 
-      // ==== Log Out === //
-      function logoutConfirmation(logoutURL) {
+    // Add an event listener to handle the change event
+    statusFilter.addEventListener('change', function() {
+    // Get the selected filter value
+    var selectedStatus = statusFilter.value;
+
+    // Get all table rows
+    var tableRows = document.querySelectorAll('#defectTable tbody tr');
+
+    // Loop through each table row
+    tableRows.forEach(function(row) {
+      // Get the status cell value (adjust the index based on your actual structure)
+      var statusCell = row.cells[8].textContent;
+
+      // Check if the selected status matches the row's status
+      if (selectedStatus === '' || selectedStatus === statusCell) {
+        // Show the row if it matches or if no filter is selected
+        row.style.display = '';
+      } else {
+        // Hide the row if it doesn't match
+        row.style.display = 'none';
+      }
+    });
+  });
+
+
+    // ==== Log Out === //
+    function logoutConfirmation(logoutURL) {
               if (confirm("Are you sure you want to log out?")) {
                   // User clicked "Yes", perform logout action
                   window.location.href = logoutURL;
@@ -474,65 +537,93 @@
               }
           }
 
-    // ==== PIE CHART === //
-    var ctxPie = document.getElementById('myChartPie').getContext('2d');
-    var myChartPie = new Chart(ctxPie, {
-        type: 'pie',
+    // ==== DOUGHNUT CHART === //
+    var ctxDoughnut = document.getElementById('myChartDoughnut').getContext('2d');
+    var myChartDoughnut = new Chart(ctxDoughnut, {
+        type: 'doughnut',
         data: {
-            labels: <?php echo json_encode($chartCategoriesPie); ?>,
+            labels: <?php echo json_encode($chartCategoriesDoughnut); ?>,
             datasets: [{
                 label: 'Status',
-                data: <?php echo json_encode($chartCountsPie); ?>,
+                data: <?php echo json_encode($chartCountsDoughnut); ?>,
                 backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(153, 255, 134)',
+                    'rgba(227, 20, 48, 0.9)',
+                    'rgba(16, 205, 50, 0.9)',
                 ],
                 hoverOffset: 4
             }],
         },
     });
 
-    // ==== BAR CHART === //
-    var ctxBar = document.getElementById('myChart').getContext('2d');
-    var myChartBar = new Chart(ctxBar, {
-        type: 'bar',
+    // ==== PIE CHART === //
+    var ctxPie = document.getElementById('myChartPie').getContext('2d');
+    var myChartPie = new Chart(ctxPie, {
+        type: 'pie',
         data: {
-            labels: <?php echo json_encode($defectCategories); ?>,
+            labels: <?php echo json_encode($defectCategoriesPie); ?>,
             datasets: [{
                 label: 'Quantity',
-                data: <?php echo json_encode($defectCounts); ?>,
+                data: <?php echo json_encode($defectCountsPie); ?>,
                 backgroundColor: [
-                    'rgba(153, 0, 153, 0.7)',
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(216, 116, 3, 0.84)',
+                    'rgba(149, 82, 5, 0.84)',
+                    'rgba(217, 170, 76, 0.84)',
                 ],
                 borderColor: [
-                    'rgba(153, 0, 153, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
+                    'rgba(216, 116, 3, 1)',
+                    'rgba(149, 82, 5, 1)',
+                    'rgba(217, 170, 76, 1)',
                 ],
                 borderWidth: 1,
             }],
         },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                },
-            },
-        },
     });
 
-      //scroll data table
-      new DataTable('#defectTable', {
-          scrollX: true
-      });
-  
-      //static data table
-    //   $(document).ready(function () {
-    //     // Initialize DataTable
-    //     $('#yourTableId').DataTable();
-    // });
+    // ==== BAR CHART === //
+    const chartData = <?php echo json_encode($data); ?>;
+
+    const labels = chartData.map(entry => entry.aircraft_id);
+    const frequencies = chartData.map(entry => entry.count); // Fix this line
+
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'Frequency',
+        data: frequencies,
+        backgroundColor: 'rgba(19, 69, 248, 0.8)',
+        borderColor: 'rgb(75, 192, 192)',
+        borderWidth: 1
+      }]
+    };
+
+    // ==== BAR CHART === //
+    const canvas = document.getElementById('aircraftChart');
+    const ctx = canvas.getContext('2d');
+
+    // Create the bar chart
+    const aircraftChart = new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: {
+        scales: {
+          x: {
+            type: 'category',
+            labels: labels,
+            title: {
+              display: true,
+              text: 'Aircraft ID'
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Frequency'
+            }
+          }
+        }
+      }
+    });
 
     </script>
   </body>

@@ -62,7 +62,7 @@
                   d="M8.74999 18.3333C12.2376 18.3333 15.1364 15.8128 15.7244 12.4941C15.8448 11.8143 15.2737 11.25 14.5833 11.25H9.99999C9.30966 11.25 8.74999 10.6903 8.74999 10V5.41666C8.74999 4.7263 8.18563 4.15512 7.50586 4.27556C4.18711 4.86357 1.66666 7.76243 1.66666 11.25C1.66666 15.162 4.83797 18.3333 8.74999 18.3333Z" /> 
               </svg>
             </span>
-            <span class="text">Problem Classifications</span>
+            <span class="text">Issues</span>
           </a>
       </li>
       <!-- Dashboard Starts -->  
@@ -286,64 +286,6 @@
         window.location.href = "toDo.php";
         });
 
-      // ======== jvectormap activation
-      var markers = [
-        { name: "Egypt", coords: [26.8206, 30.8025] },
-        { name: "Russia", coords: [61.524, 105.3188] },
-        { name: "Canada", coords: [56.1304, -106.3468] },
-        { name: "Greenland", coords: [71.7069, -42.6043] },
-        { name: "Brazil", coords: [-14.235, -51.9253] },
-      ];
-
-      var jvm = new jsVectorMap({
-        map: "world_merc",
-        selector: "#map",
-        zoomButtons: true,
-
-        regionStyle: {
-          initial: {
-            fill: "#d1d5db",
-          },
-        },
-
-        labels: {
-          markers: {
-            render: (marker) => marker.name,
-          },
-        },
-
-        markersSelectable: true,
-        selectedMarkers: markers.map((marker, index) => {
-          var name = marker.name;
-
-          if (name === "Russia" || name === "Brazil") {
-            return index;
-          }
-        }),
-        markers: markers,
-        markerStyle: {
-          initial: { fill: "#4A6CF7" },
-          selected: { fill: "#ff5050" },
-        },
-        markerLabelStyle: {
-          initial: {
-            fontWeight: 400,
-            fontSize: 14,
-          },
-        },
-      });
-      // ====== calendar activation
-      document.addEventListener("DOMContentLoaded", function () {
-        var calendarMiniEl = document.getElementById("calendar-mini");
-        var calendarMini = new FullCalendar.Calendar(calendarMiniEl, {
-          initialView: "dayGridMonth",
-          headerToolbar: {
-            end: "today prev,next",
-          },
-        });
-        calendarMini.render();
-      });
-      
     </script>
   </body>
 </html>

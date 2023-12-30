@@ -62,7 +62,7 @@
                   d="M8.74999 18.3333C12.2376 18.3333 15.1364 15.8128 15.7244 12.4941C15.8448 11.8143 15.2737 11.25 14.5833 11.25H9.99999C9.30966 11.25 8.74999 10.6903 8.74999 10V5.41666C8.74999 4.7263 8.18563 4.15512 7.50586 4.27556C4.18711 4.86357 1.66666 7.76243 1.66666 11.25C1.66666 15.162 4.83797 18.3333 8.74999 18.3333Z" /> 
               </svg>
             </span>
-            <span class="text">Problem Classifications</span>
+            <span class="text">Issues</span>
           </a>
       </li>
       <!-- Dashboard Starts -->  
@@ -208,14 +208,21 @@
                 <div class="card-style mb-30">
                     <h6 class="mb-25">Please fill in all the details required.</h6>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="input-style-1">
                                 <label>DEFECT ID</label>                             
                                 <input type="text" name="defect_id" placeholder="DEFECT ID" required/>
                                 <small class="form-text text-danger">* This field is required.</small>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="input-style-1">
+                                <label>AIRCRAFT EFFECTED</label>                             
+                                <input type="text" name="aircraft_id" placeholder="AIRCRAFT ID" required/>
+                                <small class="form-text text-danger">* This field is required.</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                         <div class="select-style-1">
                             <label>DEFECT TYPE</label>
                             <div class="select-position"> 
@@ -229,19 +236,32 @@
                             <small class="form-text text-danger">* This field is required.</small>
                         </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="input-style-1">
                               <label>ISSUE DATE</label>
                               <input type="date" name="issue_date" required />
                               <small class="form-text text-danger">* This field is required.</small>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="input-style-2">
                             <label>ISSUE TIME</label>
                               <input type="time" name="issue_time" required/>
                               <small class="form-text text-danger">* This field is required.</small>
                             </div>
+                        </div>
+                        <div class="col-md-4">
+
+                        <div class="select-style-1">
+                            <label>STATUS</label>
+                            <div class="select-position"> 
+                            <select name="status">
+                                    <option value="">SELECT CATEGORY</option>
+                                    <option value="OPEN">OPEN</option>
+                                    <option value="CLOSED">CLOSED</option>
+                                </select>
+                            </div>
+                        </div>
                         </div> 
                         <div class="input-style-2">
                             <label>DEFECT DESCRIPTION</label>
@@ -250,7 +270,7 @@
                         </div>
 
                         <!-- Add a horizontal line to separate sections -->
-                        <hr class="section-divider">
+                        <!-- <hr class="section-divider">
                         <h6 class="mb-25">Please update the details accordingly.</h6>
 
                         <div class="col-md-4">
@@ -274,10 +294,10 @@
                         <div class="input-style-2">
                             <label>ACTION DESCRIPTION</label>
                             <textarea name="action_description" placeholder="PLEASE DESCRIBE THE ACTION THAT HAVE BEEN TAKE..." rows="5"></textarea>
-                        </div>
+                        </div> -->
 
                         <!-- Add a horizontal line to separate sections -->
-                        <hr class="section-divider">
+                        <!-- <hr class="section-divider">
                         <h6 class="mb-25">Please update the details accordingly.</h6>
 
                         <div class="col-md-4">
@@ -291,8 +311,8 @@
                                 </select>
                             </div>
                         </div>
-                        </div>
-                        <div class="col-md-4">
+                        </div> -->
+                        <!-- <div class="col-md-4">
                             <div class="input-style-1">
                               <label>CLOSED DATE</label>
                               <input type="date" name="closed_date"/>
@@ -303,7 +323,7 @@
                             <label>CLOSED TIME</label>
                               <input type="time" name="closed_time"/>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="button-container row">
                             <div class="col-md-6">
                                 <button type="submit" class="main-btn primary-btn rounded-full btn-hover">Submit</button> 
@@ -345,63 +365,6 @@
         // You can redirect the user to another page or perform any other action
         window.location.href = "toDo.php";
         });
-      // ======== jvectormap activation
-      var markers = [
-        { name: "Egypt", coords: [26.8206, 30.8025] },
-        { name: "Russia", coords: [61.524, 105.3188] },
-        { name: "Canada", coords: [56.1304, -106.3468] },
-        { name: "Greenland", coords: [71.7069, -42.6043] },
-        { name: "Brazil", coords: [-14.235, -51.9253] },
-      ];
-
-      var jvm = new jsVectorMap({
-        map: "world_merc",
-        selector: "#map",
-        zoomButtons: true,
-
-        regionStyle: {
-          initial: {
-            fill: "#d1d5db",
-          },
-        },
-
-        labels: {
-          markers: {
-            render: (marker) => marker.name,
-          },
-        },
-
-        markersSelectable: true,
-        selectedMarkers: markers.map((marker, index) => {
-          var name = marker.name;
-
-          if (name === "Russia" || name === "Brazil") {
-            return index;
-          }
-        }),
-        markers: markers,
-        markerStyle: {
-          initial: { fill: "#4A6CF7" },
-          selected: { fill: "#ff5050" },
-        },
-        markerLabelStyle: {
-          initial: {
-            fontWeight: 400,
-            fontSize: 14,
-          },
-        },
-      });
-      // ====== calendar activation
-      document.addEventListener("DOMContentLoaded", function () {
-        var calendarMiniEl = document.getElementById("calendar-mini");
-        var calendarMini = new FullCalendar.Calendar(calendarMiniEl, {
-          initialView: "dayGridMonth",
-          headerToolbar: {
-            end: "today prev,next",
-          },
-        });
-        calendarMini.render();
-      });
 
     </script>
   </body>
