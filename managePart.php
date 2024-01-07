@@ -216,29 +216,29 @@
                             <div class="input-style-1">
                                 <label>PART NO</label>
                                 
-                                <input type="text" name="part_no" placeholder="PART NO" />
+                                <input type="text" name="part_no" placeholder="PART NO" required/>
                                 <small class="form-text text-danger">* This field is required.</small>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input-style-2">
                                 <label>PART MATCH</label>
-                                <input type="text" name="part_match" placeholder="PART MATCH" />
+                                <input type="text" name="part_match" placeholder="PART MATCH" required/>
                                 <small class="form-text text-danger">* This field is required.</small>
                             </div>
                         </div>
                     </div>
                     <div class="input-style-2">
                         <label>DESCRIPTION</label>
-                        <textarea name="description" placeholder="DESCRIPTION" rows="5"></textarea>
+                        <textarea name="description" placeholder="DESCRIPTION" rows="5" required></textarea>
                         <small class="form-text text-danger">* This field is required.</small>
                     </div>
                     <div class="col-md-4">
                     <div class="select-style-1">
                         <label>MATERIAL CLASS</label>
                         <div class="select-position"> 
-                        <select name="material_class">
-                                <option value="">SELECT CATEGORY</option>
+                        <select name="material_class" required>
+                                <option value="" disabled>SELECT CATEGORY</option>
                                 <option value="ROTABLE">ROTABLE</option>
                                 <option value="EXPANDABLE">EXPANDABLE</option>
                                 <option value="CONSUMABLE">CONSUMABLE</option>

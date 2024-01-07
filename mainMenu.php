@@ -320,9 +320,9 @@
                   <div class="col-lg-12">
                       <!-- input style start -->
                       <div class="card-style mb-30">
-                          <h6 class="mb-25">Aircraft Effected</h6>
+                          <h6 class="mb-25">Aircraft Affected</h6>
                           <div class="chart-container-1">
-                          <canvas id="aircraftChart"></canvas>
+                          <canvas id="aircraftChart" width="1200"></canvas>
                           </div>
                       </div>
                   <!-- end col -->
@@ -374,7 +374,7 @@
                           <th style="width: 3%;">
                           </th>
                           <th style="width: 15%;">
-                            <h6>AIRCRAFT EFFECTED</h6>
+                            <h6>AIRCRAFT AFFECTED</h6>
                           </th>
                           <th style="width: 3%;">
                           </th>
@@ -588,7 +588,7 @@
     const chartData = <?php echo json_encode($data); ?>;
 
     const labels = chartData.map(entry => entry.aircraft_id);
-    const frequencies = chartData.map(entry => entry.count); // Fix this line
+    const frequencies = chartData.map(entry => entry.count);
 
     const data = {
       labels: labels,
@@ -604,6 +604,9 @@
     // ==== BAR CHART === //
     const canvas = document.getElementById('aircraftChart');
     const ctx = canvas.getContext('2d');
+
+    // Adjust the canvas size
+canvas.width = 1200; // Set the desired width
 
     // Create the bar chart
     const aircraftChart = new Chart(ctx, {
