@@ -72,7 +72,7 @@
 
         <!-- Expenses Starts -->
       <li class="nav-item">
-        <a href="expenses.php">
+        <a href="all_expenses.php">
           <span class="icon">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -195,79 +195,94 @@
 
           <!-- ========== EXPENSES LABEL ========== -->
           <?php
-            include 'connect.php';
+          include 'connect.php';
 
-            // Function to format the currency as RM
-            function formatCurrency($amount) {
-                return 'RM ' . number_format($amount, 2);
-            }
+          // Function to format the currency as RM
+          function formatCurrency($amount) {
+              return 'RM ' . number_format($amount, 2);
+          }
 
-            // Years to display
-            $years = [2021, 2022, 2023];
+          // material_class to display
+          $material_classes = ["ROTABLE", "EXPANDABLE", "CONSUMABLE"];
 
-            foreach ($years as $year) {
-              // Query to get the sum of average_price for the specific year
-              $query = "SELECT SUM(average_price) AS total_price FROM all_expenses WHERE YEAR(date) = $year";
-              $result = $mysqli->query($query);
+          foreach ($material_classes as $material_class) {
+              // Query to get the sum of average_price for the specific material_class using prepared statements
+              $query = "SELECT SUM(average_price) AS total_price FROM all_expenses WHERE material_class = ?";
+              $stmt = $mysqli->prepare($query);
 
-              // Check if the query was successful
-              if ($result) {
-                  $row = $result->fetch_assoc();
-                  $sumAveragePrice = $row['total_price'];
+              // Check if the prepared statement was successful
+              if ($stmt) {
+                  $stmt->bind_param("s", $material_class);
+                  $stmt->execute();
+                  $result = $stmt->get_result();
 
-                  // Format the sum as RM
-                  $formattedSum = formatCurrency($sumAveragePrice);
+                  // Check if the query was successful
+                  if ($result) {
+                      $row = $result->fetch_assoc();
+                      $sumAveragePrice = $row['total_price'];
 
-                  // Check the current year and display the result accordingly
-                  if ($year == 2021) {
-                      echo '<div class="row">
+                      // Format the sum as RM
+                      $formattedSum = formatCurrency($sumAveragePrice);
+
+
+                      // Display the result based on material_class
+                      if ($material_class == "ROTABLE") {
+                        echo '<div class="row">
+                              <div class="col-lg-4 col-md-6 col-sm-12">
+                                  <div class="icon-card mb-30">
+                                      <div class="icon orange">
+                                          <i class="lni lni-money-location"></i>
+                                      </div>
+                                      <div class="content">
+                                          <h6 class="mb-2 text-bold">ROTABLE</h6>
+                                          <h3 class="text-bold mb-10">' . $formattedSum . '</h3>
+                                      </div>
+                                  </div> 
+                              </div>';
+                    } elseif ($material_class == "CONSUMABLE") {
+                        echo '
+                              <div class="col-lg-4 col-md-6 col-sm-12">
+                                  <div class="icon-card mb-30">
+                                      <div class="icon purple">
+                                          <i class="lni lni-money-location"></i>
+                                      </div>
+                                      <div class="content">
+                                          <h6 class="mb-2 text-bold">CONSUMABLE</h6>
+                                          <h3 class="text-bold mb-10">' . $formattedSum . '</h3>
+                                      </div>
+                                  </div>             
+                              </div>';
+                    } elseif ($material_class == "EXPANDABLE") {
+                        echo '
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="icon-card mb-30">
-                                    <div class="icon orange">
+                                    <div class="icon blue">
                                         <i class="lni lni-money-location"></i>
                                     </div>
                                     <div class="content">
-                                        <h6 class="mb-10">Total Expenses (' . $year . ')</h6>
+                                        <h6 class="mb-2 text-bold">EXPANDABLE</h6>
                                         <h3 class="text-bold mb-10">' . $formattedSum . '</h3>
                                     </div>
-                                </div> 
+                                </div>
                             </div>';
-                  } elseif ($year == 2022) {
-                      echo '
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="icon-card mb-30">
-                                    <div class="icon purple">
-                                        <i class="lni lni-money-location"></i>
-                                    </div>
-                                    <div class="content">
-                                        <h6 class="mb-10">Total Expenses (' . $year . ')</h6>
-                                        <h3 class="text-bold mb-10">' . $formattedSum . '</h3>
-                                    </div>
-                                </div>             
-                            </div>';
-                  } elseif ($year == 2023) {
-                      echo '
-                          <div class="col-lg-4 col-md-6 col-sm-12">
-                              <div class="icon-card mb-30">
-                                  <div class="icon blue">
-                                      <i class="lni lni-money-location"></i>
-                                  </div>
-                                  <div class="content">
-                                      <h6 class="mb-10">Total Expenses (' . $year . ')</h6>
-                                      <h3 class="text-bold mb-10">' . $formattedSum . '</h3>
-                                  </div>
-                              </div>
-                          </div> 
-                          </div>';
+                  } else {
+                      echo "Error in result: " . $stmt->error;
                   }
-              } else {
-                  echo "Error: " . $mysqli->error;
-              }
-            }
 
-            // Close the connection
-            $mysqli->close();
-            ?>
+                  // Close the statement
+                  $stmt->close();
+              } else {
+                  echo "Error in prepared statement: " . $mysqli->error;
+              }
+          }
+        }
+
+        
+
+          // Close the connection
+          $mysqli->close();
+          ?>
+
             <!-- ========== EXPENSES LABEL END ========== -->
 
             <!-- ========== EXPENSES LINE CHART ========== -->
@@ -309,8 +324,7 @@
                       <div class="select-style-1">
                         <div class="select-position select-sm">
                           <select id="expenseType" class="light-bg">
-                            <option value="ROTABLE">ROTABLE</option>
-                            <option value="CONSUMABLE & EXPANDABLE">OTHERS</option>
+                            <option value="">ALL PARTS</option>
                           </select>
                         </div>
                       </div>
