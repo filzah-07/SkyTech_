@@ -570,14 +570,14 @@
                 label: 'Quantity',
                 data: <?php echo json_encode($defectCountsPie); ?>,
                 backgroundColor: [
-                    'rgba(174, 0, 172, 0.8)',
-                    'rgba(213, 14, 173, 0.8)',
-                    'rgba(175, 59, 254, 0.8)',
+                    'rgba(255, 225, 61, 0.8)',
+                    'rgba(61, 196, 255, 0.8)',
+                    'rgba(255, 140, 61, 0.8)',
                 ],
                 borderColor: [
-                    'rgba(174, 0, 172, 1)',
-                    'rgba(213, 14, 173, 1)',
-                    'rgba(175, 59, 254, 1)',
+                    'rgba(255, 225, 61, 1)',
+                    'rgba(61, 196, 255, 1)',
+                    'rgba(255, 140, 61, 1)',
                 ],
                 borderWidth: 1,
             }],
@@ -595,7 +595,7 @@
       datasets: [{
         label: 'Frequency',
         data: frequencies,
-        backgroundColor: 'rgba(19, 69, 248, 0.8)',
+        backgroundColor: 'rgba(13, 34, 234, 0.8)',
         borderColor: 'rgb(75, 192, 192)',
         borderWidth: 1
       }]
