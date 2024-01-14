@@ -165,7 +165,7 @@
             <div class="row align-items-center">
               <div class="col-md-6">
                 <div class="title">
-                  <h2>Manage Part</h2>
+                  <h2>Add Part</h2>
                 </div>
               </div>
               <!-- end col -->
@@ -177,7 +177,7 @@
                         <a href="#0">Activity</a>
                       </li>
                       <li class="breadcrumb-item active" aria-current="page">
-                        Manage Part
+                        Add Part
                       </li>
                     </ol>
                   </nav>
@@ -235,9 +235,7 @@
                             <div class="col-md-6">
                                 <button type="submit" class="main-btn primary-btn rounded-full btn-hover" onclick="showSuccessMessage()">Submit</button> 
                             </div>
-                            <div id="successMessage" style="display:none;" class="col-md-6">
-    <p class="success-text">Part successfully added!</p>
-</div>
+                            
                             <div class="col-md-6">
                                 <button type="button" class="main-btn danger-btn rounded-full btn-hover" id="cancelButton">Cancel</button>
                             </div>
@@ -276,16 +274,6 @@
         // You can redirect the user to another page or perform any other action
         window.location.href = "toDo.php";
         });
-
-
- 
-    function showSuccessMessage() {
-        // Assuming you have a function to handle the submission of the form
-        // You can include your form submission logic here
-
-        // After a successful submission, show the success message
-        document.getElementById("successMessage").style.display = "block";
-    }
 
 
 

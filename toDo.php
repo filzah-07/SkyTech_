@@ -208,11 +208,11 @@
                     </a>
                   </div>
                   <div class="card-content">
-                    <h4><a href="managePart.php">Manage Part</a></h4>
+                    <h4><a href="managePart.php">Add Part</a></h4>
                     <p>
                     User can fill this form which designed to facilitate the addition of new parts to the inventory. 
                     </p>
-                    <a href="managePart.php" class="main-btn primary-btn btn-hover">Manage Part</a>
+                    <a href="managePart.php" class="main-btn primary-btn btn-hover">Add Part</a>
                   </div>
                 </div>
                 <!-- end card -->
